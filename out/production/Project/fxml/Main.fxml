@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import java.util.ArrayList?>
+
+
+<fx:root fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../style.css" type="Pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="303.75" layoutY="75.0" text="Five Card Draw Poker Game">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <VBox fx:id="firstScene" layoutX="250.0" layoutY="273.0" prefHeight="200.0" prefWidth="500.0" spacing="20.0" stylesheets="@../style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="260.0">
+               <children>
+                  <Label text="Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="name" prefHeight="31.0" prefWidth="187.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="260.0">
+               <children>
+                  <Label text="Number of Player">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="playerCount" prefHeight="31.0" prefWidth="86.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="nextButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="75.0" text="NEXT" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="30.0" />
+         </padding>
+      </VBox>
+      <Button id="seatBtn" fx:id="seatBtn1" layoutX="755.0" layoutY="198.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" stylesheets="@../style.css" text="Select">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="seatBtn" fx:id="seatBtn2" layoutX="755.0" layoutY="486.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" stylesheets="@../style.css" text="Select">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="seatBtn" fx:id="seatBtn3" layoutX="463.0" layoutY="549.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" stylesheets="@../style.css" text="Select">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="seatBtn" fx:id="seatBtn4" layoutX="175.0" layoutY="484.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" stylesheets="@../style.css" text="Select">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button id="seatBtn" fx:id="seatBtn5" layoutX="175.0" layoutY="198.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="75.0" stylesheets="@../style.css" text="Select">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <VBox fx:id="secondScene" layoutX="250.0" layoutY="273.0" prefHeight="200.0" prefWidth="500.0" spacing="20.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="31.0" prefWidth="260.0">
+               <children>
+                  <Label text="Select your seat to start game">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets top="80.0" />
+         </padding>
+      </VBox>
+
+      <fx:define>
+         <ArrayList fx:id="seatButton">
+            <fx:reference source="seatBtn1" />
+            <fx:reference source="seatBtn2" />
+            <fx:reference source="seatBtn3" />
+            <fx:reference source="seatBtn4" />
+            <fx:reference source="seatBtn5" />
+         </ArrayList>
+      </fx:define>
+
+   </children>
+</fx:root>

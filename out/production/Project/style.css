@@ -1,0 +1,25 @@
+#table{
+    -fx-background-image: url("img/table2.jpg");
+}
+
+#seatBtn {
+    -fx-background-color: white;
+    -fx-border-color: white;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+}
+
+#seatBtn:hover{
+    -fx-background-color: yellow;
+    -fx-border-color: yellow;
+    -fx-border-radius: 100;
+    -fx-background-radius: 100;
+}
+
+#nameTag {
+    -fx-background-color: #151E3D;
+    -fx-border-color: white;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+}
