@@ -20,18 +20,12 @@ public class GraphicWindow extends Application {
     private static Stage stage;
     private static HashMap<Integer, Point> seatPosition = new HashMap<Integer, Point>();
 
-    @FXML
-    private TextField name;
-    @FXML
-    private ComboBox<String> playerCount;
-    @FXML
-    private Button nextButton;
-    @FXML
-    private List<Button> seatButton;
-    @FXML
-    private VBox firstScene;
-    @FXML
-    private VBox secondScene;
+    @FXML private TextField name;
+    @FXML private ComboBox<String> playerCount;
+    @FXML private Button nextButton;
+    @FXML private List<Button> seatButton;
+    @FXML private VBox firstScene;
+    @FXML private VBox secondScene;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -65,7 +59,6 @@ public class GraphicWindow extends Application {
         playerCount.getSelectionModel().select(1);
         // hide the second scene
         secondScene.setVisible(false);
-
 
 
         // hide button in the first scene

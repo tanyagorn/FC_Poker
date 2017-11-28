@@ -23,3 +23,11 @@
     -fx-background-radius: 50;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
 }
+
+#inactiveNameTag {
+    -fx-background-color: gray;
+    -fx-border-color: white;
+    -fx-border-radius: 50;
+    -fx-background-radius: 50;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+}

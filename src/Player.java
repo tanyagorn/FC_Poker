@@ -6,6 +6,7 @@ import javafx.scene.layout.VBox;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 
 public class Player implements Comparable<Player> {
     protected String name;
@@ -17,12 +18,12 @@ public class Player implements Comparable<Player> {
     protected int score;
     protected boolean active;
 
-    @FXML
-    protected Label nameLabel;
-    @FXML
-    protected Label balanceLabel;
+    @FXML protected VBox nameTag;
+    @FXML protected Label nameLabel;
+    @FXML protected Label balanceLabel;
 
     public Player() {
+
     }
 
     public Player(String name, int seat, Point position, int balance, boolean active) {
@@ -97,22 +98,24 @@ public class Player implements Comparable<Player> {
         return position;
     }
 
+    public CardOnHand getCardOnHand() {
+        return cardOnHand;
+    }
+
+    public Card getCard(int which)
+    {
+        return cardOnHand.getCard(which);
+    }
+
     public void addCardOnHand(Card card) {
         cardOnHand.addCard(card, position, true);
     }
 
-    public void bettingTurn() {
-        // enable all button, so that player can't choose anything
-
-
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException ie)
-//        {
-//            System.out.println("Scanning...");
-//        }
-
+    // bettingTurn of actual player will be determined in Game class
+    public String bettingTurn(List<String> availableOption) {
+        return null;
     }
+
 
     @Override
     public int compareTo(Player comparestu) {

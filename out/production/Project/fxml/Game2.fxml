@@ -11,6 +11,11 @@
 
 <fx:root fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../style.css" type="Pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Label fx:id="bettingRoundLabel" layoutX="373.0" layoutY="55.0" text="Betting Round">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
       <Label layoutX="466.0" layoutY="137.0" text="Dealer">
          <font>
             <Font size="24.0" />
