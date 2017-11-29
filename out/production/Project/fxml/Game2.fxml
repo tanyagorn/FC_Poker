@@ -11,7 +11,7 @@
 
 <fx:root fx:id="table" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" stylesheets="@../style.css" type="Pane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="bettingRoundLabel" layoutX="373.0" layoutY="55.0" text="Betting Round">
+      <Label fx:id="roundLabel" layoutX="373.0" layoutY="55.0" text="Betting Round">
          <font>
             <Font size="40.0" />
          </font>
@@ -32,10 +32,10 @@
                   <Button fx:id="raise" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Raise" />
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <Slider fx:id="slider" maxWidth="570.0" prefHeight="30.0" prefWidth="570.0" />
-                  <TextField fx:id="inputText" prefHeight="31.0" prefWidth="120.0" />
+                  <Slider fx:id="slider" maxWidth="570.0" prefHeight="30.0" prefWidth="557.0" />
+                  <TextField fx:id="inputText" prefHeight="31.0" prefWidth="135.0" />
                </children>
             </HBox>
          </children>

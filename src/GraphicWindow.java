@@ -60,7 +60,6 @@ public class GraphicWindow extends Application {
         // hide the second scene
         secondScene.setVisible(false);
 
-
         // hide button in the first scene
         // also adding event handler for each button
         for (int i = 0; i < seatButton.size(); i++) {
@@ -79,34 +78,6 @@ public class GraphicWindow extends Application {
                 seatButton.get(i).setVisible(true);
             }
         });
-
-/*
-        // Animation happen here
-        final Rectangle rectPath = new Rectangle (0, 0, 40, 40);
-        rectPath.setArcHeight(10);
-        rectPath.setArcWidth(10);
-        rectPath.setFill(Color.ORANGE);
-
-        Path path = new Path();
-        path.getElements().add(new MoveTo(20,20));
-        path.getElements().add(new LineTo(795,230));
-        path.getElements().add(new LineTo(795,520));
-        path.getElements().add(new LineTo(500,580));
-        path.getElements().add(new LineTo(210,520));
-        path.getElements().add(new LineTo(210,230));
-        //path.getElements().add(new CubicCurveTo(380, 0, 380, 120, 200, 120));
-        //path.getElements().add(new CubicCurveTo(0, 120, 0, 240, 380, 240));
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setDuration(Duration.millis(8000));
-        pathTransition.setPath(path);
-        pathTransition.setNode(rectPath);
-        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
-        pathTransition.setCycleCount(Timeline.INDEFINITE);
-        pathTransition.setAutoReverse(true);
-        pathTransition.play();
-
-        pane.getChildren().add(rectPath);
-*/
         
         primaryStage.setTitle("Five Card Draw Poker Game");
         primaryStage.setScene(scene);

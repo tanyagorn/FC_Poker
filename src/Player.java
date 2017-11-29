@@ -17,6 +17,8 @@ public class Player implements Comparable<Player> {
     protected int betBalance;
     protected int score;
     protected boolean active;
+    protected Label betTag;
+    protected Label amountTag;
 
     @FXML protected VBox nameTag;
     @FXML protected Label nameLabel;
@@ -52,6 +54,15 @@ public class Player implements Comparable<Player> {
 
         nameLabel.setText(name);
         balanceLabel.setText(Integer.toString(balance));
+        betTag = new Label();
+        betTag.setLayoutX(Game.getBettingTagPosition(this).getX());
+        betTag.setLayoutY(Game.getBettingTagPosition(this).getY());
+
+        amountTag = new Label();
+        amountTag.setLayoutX(Game.getBettingAmountPosition(this).getX());
+        amountTag.setLayoutY(Game.getBettingAmountPosition(this).getY());
+        Game.getPane().getChildren().addAll(betTag, amountTag);
+
     }
 
     public String getName() {
@@ -116,6 +127,27 @@ public class Player implements Comparable<Player> {
         return null;
     }
 
+    public void setNameTagInactive() {
+        this.nameTag.setStyle("-fx-background-color: #373737;");
+    }
+
+    public void setBetTag(String display)
+    {
+        this.betTag.setText(display);
+    }
+
+    public Label getBetTag()
+    {
+        return this.betTag;
+    }
+
+    public Label getAmountTag() {
+        return amountTag;
+    }
+
+    public void setBalanceLabel() {
+        this.balanceLabel.setText(Integer.toString(balance));
+    }
 
     @Override
     public int compareTo(Player comparestu) {

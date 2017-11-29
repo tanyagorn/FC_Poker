@@ -1,6 +1,8 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+
 
 import java.awt.*;
 import java.io.IOException;
@@ -33,7 +35,15 @@ public class Bot extends Player {
         vBox.setLayoutX(position.getX() - (180/2));
         vBox.setLayoutY(position.getY());
 
+        nameLabel.setText(name);
         balanceLabel.setText(Integer.toString(balance));
+        betTag = new Label();
+        betTag.setLayoutX(Game.getBettingTagPosition(this).getX());
+        betTag.setLayoutY(Game.getBettingTagPosition(this).getY());
+        amountTag = new Label();
+        amountTag.setLayoutX(Game.getBettingAmountPosition(this).getX());
+        amountTag.setLayoutY(Game.getBettingAmountPosition(this).getY());
+        Game.getPane().getChildren().addAll(betTag, amountTag);
     }
 
     @Override
@@ -48,13 +58,11 @@ public class Bot extends Player {
     // TODO: calculating percent of winning then making a decision
     @Override
     public String bettingTurn(List<String> availableOption) {
-
-//        int random = 0;
-//        random = (int)(Math.random() * (availableOption.size()-1));
-//        availableOption.get(random);
-//        return availableOption.get(random);
-
-        return "fold";
+        System.out.println("available opt = " + availableOption);
+        int random = 0;
+        random = (int)(Math.random() * (availableOption.size()-1));
+        availableOption.get(random);
+        return availableOption.get(random);
     }
 
 }

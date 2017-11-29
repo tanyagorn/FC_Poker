@@ -24,7 +24,7 @@
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
 }
 
-#inactiveNameTag {
+.inactiveNameTag {
     -fx-background-color: gray;
     -fx-border-color: white;
     -fx-border-radius: 50;
