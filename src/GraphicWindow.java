@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class GraphicWindow extends Application {
     private static Pane pane;
     private static Stage stage;
     private static HashMap<Integer, Point> seatPosition = new HashMap<Integer, Point>();
+
+    private static HashMap<Integer, ArrayList<String>> test = new HashMap<Integer, ArrayList<String>>();
 
     @FXML private TextField name;
     @FXML private ComboBox<String> playerCount;
@@ -92,8 +95,6 @@ public class GraphicWindow extends Application {
     // return clone version of seatPosition
     public static Point getSeatPosition(Integer seat) {
         return seatPosition.get(seat);
-//        HashMap<Integer, Point> clone = (HashMap<Integer, Point>)seatPosition.clone();
-//        return clone;
     }
 
 

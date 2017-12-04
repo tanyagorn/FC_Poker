@@ -1,11 +1,13 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player implements Comparable<Player> {
@@ -19,6 +21,7 @@ public class Player implements Comparable<Player> {
     protected boolean active;
     protected Label betTag;
     protected Label amountTag;
+    protected ArrayList<ImageView> imageCards = new ArrayList<ImageView>();
 
     @FXML protected VBox nameTag;
     @FXML protected Label nameLabel;
@@ -147,6 +150,19 @@ public class Player implements Comparable<Player> {
 
     public void setBalanceLabel() {
         this.balanceLabel.setText(Integer.toString(balance));
+    }
+
+    public ArrayList<ImageView> getImageCards() {
+        return imageCards;
+    }
+
+    public ImageView getImageCards(int i) {
+        return this.imageCards.get(i);
+    }
+
+
+    public void addImageCards(ImageView img) {
+        this.imageCards.add(img);
     }
 
     @Override
