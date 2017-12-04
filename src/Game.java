@@ -39,7 +39,7 @@ public class Game {
     private static Pane pane;
 
     private String state;
-    private int subState;       // subState reference to index in players [0,1,2,3,4]
+    private int subState;            // subState reference to index in players [0,1,2,3,4]
     private static final double CARD_POSITION = 20;
 
     private List<Integer> availableSeat = new ArrayList<>(Arrays.asList(1,2,3,4,5));
@@ -51,8 +51,8 @@ public class Game {
     private int highestBetBalance;
     private int additionalAmount;
     private boolean round;
+    private HBox selectedCard;   // keep selected card
     ArrayList<Node> nodes = new ArrayList<Node>();
-
     private Label poolLabel;
 
     @FXML private Label roundLabel;
@@ -63,6 +63,8 @@ public class Game {
     @FXML private Button raise;
     @FXML private Slider slider;
     @FXML private TextField inputText;
+    @FXML private Button redrawBtn;
+    @FXML private Button endTurnBtn;
 
     public Game(String playerName, int playerCount, int seat, Point location) {
         this.playerName = playerName;
@@ -95,6 +97,7 @@ public class Game {
 
         // Will be visible when it is a time for betting round
         roundLabel.setVisible(false);
+        selectedCard = null;
 
         // Binding slider to textField, with specified format by converter
         StringConverter<Number> converter = new StringConverter<Number>() {
@@ -182,6 +185,33 @@ public class Game {
             player.setBalance(player.getBalance() - player.getBetBalance());
             state = "bet";
         });
+        redrawBtn.setOnAction((ActionEvent e) -> {
+            System.out.println("==================REMOVE==================");
+            System.out.println("==================REMOVE==================");
+            System.out.println("==================REMOVE==================");
+            System.out.println("MUST REMOVE " + selectedCard + "; ID:" + selectedCard.getId());
+            // remove GUI component
+            player.removeImgCards(selectedCard);
+            // remove card for this player
+            String matchCard = null;
+            ArrayList<Card> cards = player.getCardOnHand().getCards();
+            for (int i = cards.size()-1; i > -1; i--)
+            {
+                matchCard = cards.get(i).getCardLetter() + "_" + cards.get(i).getCardType();
+                if (matchCard.equals(selectedCard.getId()))
+                {
+                    player.getCardOnHand().removeCard(cards.get(i));
+                }
+            }
+            System.out.println(player.getImgCards());
+            System.out.println(player.getCardOnHand().getCards());
+            state = "discardCard";
+        });
+        endTurnBtn.setOnAction((ActionEvent e) -> {
+            System.out.println("==================END TURN==================");
+            System.out.println("==================END TURN==================");
+            System.out.println("==================END TURN==================");
+        });
 
         new Thread(new Runnable() {
             @Override
@@ -219,8 +249,8 @@ public class Game {
     }
 
     // Handle game's flow
-    private void update() {
-
+    private void update()
+    {
         // other thread
         switch (state)
         {
@@ -228,9 +258,12 @@ public class Game {
                 dealCard();
                 break;
             case "afterDeal":
-                delayTime(5000);
+                delayTime(1000);
                 break;
-            case "delay":
+            case "delayFold":
+                delayTime(1000);
+                break;
+            case "delayDraw":
                 delayTime(1000);
                 break;
             case "betting":
@@ -291,6 +324,15 @@ public class Game {
                 {
                     state = "winner";
                 }
+                else
+                {
+                    redrawBtn.setDisable(false);
+                    state = "draw";
+                }
+                break;
+
+            case "discardCard" :
+                System.out.println("UPDATE - DISCARD PHASE");
                 break;
         }
 
@@ -350,8 +392,8 @@ public class Game {
     }
 
     // UI
-    private void redraw() {
-
+    private void redraw()
+    {
         switch (state)
         {
             case "winner" :
@@ -384,10 +426,10 @@ public class Game {
             // then back to betting like others
             case "fold":
                 foldUI(players.get(subState));
-                state = "delay";
+                state = "delayFold";
                 break;
 
-            case "delay":
+            case "delayFold":
                 // discard cards of inactive player
                 for (Node node : nodes)
                 {
@@ -438,45 +480,87 @@ public class Game {
                 state = "draw";
                 break;
 
+            // TODO: temporary pause state to see function of drawing card for actual player
             case "draw" :
                 roundLabel.setText("Drawing Round");
                 enableSelectableCard();
+                state = "pause";
                 break;
 
+            // TODO: This is justs like in fold - should copy
+            case "discardCard" :
+                System.out.println("DISCARD in UI");
+                discardUI();
+                state = "delayDraw";
+                break;
+
+            // TODO: temporary pause state to see result
+            case "delayDraw" :
+                for (Node node : nodes)
+                {
+                    node.setVisible(false);
+                }
+                state = "pause";
+                break;
         }
 
     }
 
+    private void discardUI()
+    {
+        nodes.clear();
+        for (int i = pane.getChildren().size()-1; i >= 0; i--)
+        {
+            Node node = pane.getChildren().get(i);
+            if (node.equals(selectedCard))
+            {
+                System.out.println("FOUND!");
+                // Play animation of fold
+                Path path = new Path();
+                path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
+                path.getElements().add(new LineTo(500,140));
+                PathTransition pathTransition = new PathTransition();
+                pathTransition.setPath(path);
+                pathTransition.setNode(node);
+                pathTransition.play();
+                // Keep data for disable visibility later
+                nodes.add(node);
+            }
+        }
+    }
 
     // Used in drawing phase
     private void enableSelectableCard()
     {
-        for (Player player : players) {
+        for (Player player : players)
+        {
             if (!(player instanceof Bot))
             {
-                for (int i = 0; i < 5; i++)
+                for (HBox card : player.getImgCards())
                 {
-                    ImageView bottom = player.getImageCards(i);
-                    DropShadow ds = new DropShadow( 5, Color.rgb(0,0,255) );
-                    bottom.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) -> {
+                    DropShadow dsHover = new DropShadow( 15, Color.rgb(243,188,46) );
+                    card.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) -> {
                         if ( newValue )
-                            bottom.setEffect( ds );
+                            card.setEffect(dsHover);
                         else
-                            bottom.setEffect( null );
+                            card.setEffect(null);
                     });
 
                     // set selectable only for player to use in drawing phase
                     if (!(player instanceof Bot)) {
-                        bottom.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                        card.setOnMouseEntered(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                bottom.requestFocus();
+                                card.requestFocus();
                             }
                         });
-                        bottom.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        card.setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                System.out.println(bottom.getId());
+                                DropShadow dsClick = new DropShadow( 15, Color.rgb(156,39,6) );
+                                card.setEffect(dsClick);
+                                selectedCard = card;
+                                System.out.println(card.getId());
                             }
                         });
                     }
@@ -508,7 +592,6 @@ public class Game {
 
         // Play animation here : move from current position to the winner's position
         Path path = new Path();
-        System.out.println("pool label x,y = " + poolLabel.getLayoutX() + "," + poolLabel.getLayoutY());
         path.getElements().add(new MoveTo(0, 0));
 
         // find position we must move to
@@ -544,9 +627,11 @@ public class Game {
         pathTransition.setNode(poolLabel);
         pathTransition.play();
 
-        // also update total balance for winner
+        // Update total balance for winner
         winner.setBalance(winner.getBalance() + pool.getPool());
         winner.setBalanceLabel();
+
+        // TODO: update roundLabel and call all cards back to dealer, then deal card again
     }
 
     private void updatePoolUI()
@@ -569,25 +654,23 @@ public class Game {
     // fold animation
     private void foldUI(Player player)
     {
-        for (int i = 0; i < 5; i++)
+        ArrayList<HBox> cards = player.getImgCards();
+        for (int i = cards.size()-1; i > -1; i--)
         {
-            String id = player.getName() + " " + i;
             for (Node node : pane.getChildren())
             {
-                if (node.getId() != null)
+                if (node.equals(cards.get(i)))
                 {
-                    if (node.getId().equals(id))
-                    {
-                        // Play animation of fold
-                        Path path = new Path();
-                        path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
-                        path.getElements().add(new LineTo(500,140));
-                        PathTransition pathTransition = new PathTransition();
-                        pathTransition.setPath(path);
-                        pathTransition.setNode(node);
-                        pathTransition.play();
-                        nodes.add(node);
-                    }
+                    // Play animation of fold
+                    Path path = new Path();
+                    path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
+                    path.getElements().add(new LineTo(500,140));
+                    PathTransition pathTransition = new PathTransition();
+                    pathTransition.setPath(path);
+                    pathTransition.setNode(node);
+                    pathTransition.play();
+                    // Keep data for disable visibility later
+                    nodes.add(node);
                 }
             }
         }
@@ -608,7 +691,8 @@ public class Game {
         player.setBalanceLabel();
     }
 
-    private void dealCardUI(Player player, int i) {
+    private void dealCardUI(Player player, int i)
+    {
         // always create both side of card
         ImageView bottom = new ImageView(new javafx.scene.image.Image("img/" + player.getCard(i).getCardLetter()
                 + "_" + player.getCard(i).getCardType() + ".png"));
@@ -625,9 +709,12 @@ public class Game {
                 top
         );
 
+        // set id for this card, so that we know which card is selected
         HBox layout = new HBox();
-        layout.setId(player.getName() + " " + i);
+        layout.setId(player.getCard(i).getCardLetter() + "_" + player.getCard(i).getCardType());
         layout.getChildren().addAll(blend);
+
+        player.addImgCards(layout);
 
         // Find position by calculating from number of element in cards
         double x = 0;
@@ -653,13 +740,10 @@ public class Game {
         pathTransition.play();
 
         pane.getChildren().add(layout);
-
-        // set id for this card, so that we know which card is selected
-        bottom.setId(player.getCard(i).getCardLetter() + "_" + player.getCard(i).getCardType());
-        player.addImageCards(bottom);
     }
 
-    private void bettingUI(Player player) {
+    private void bettingUI(Player player)
+    {
         System.out.println("");
         System.out.println("Animation for " + player.getName() + " Must add one to subState");
         System.out.println("");
@@ -670,7 +754,8 @@ public class Game {
     }
 
     // Deal card phase
-    private void dealCard() {
+    private void dealCard()
+    {
         // Each player getting five cards
         for (int i = 0; i < 5; i++) {
             for (Player player : players) {
@@ -687,7 +772,8 @@ public class Game {
         }
     }
 
-    private void bettingRound(Player player) {
+    private void bettingRound(Player player)
+    {
         // check for active status, if inactive - don't do anything
         if (player.isActive())
         {
@@ -828,7 +914,8 @@ public class Game {
         return lowestBalance;
     }
 
-    private void delayTime(long time) {
+    private void delayTime(long time)
+    {
         try {
             Thread.sleep(time);
         } catch (InterruptedException e) {
@@ -836,7 +923,8 @@ public class Game {
         }
     }
 
-    private void controlButton(boolean bool) {
+    private void controlButton(boolean bool)
+    {
         bet.setDisable(bool);
         call.setDisable(bool);
         check.setDisable(bool);
@@ -844,10 +932,13 @@ public class Game {
         raise.setDisable(bool);
         slider.setDisable(bool);
         inputText.setDisable(bool);
+        redrawBtn.setDisable(bool);
     }
 
+
     // In the end list of available seat will be left
-    private int randomSeat() {
+    private int randomSeat()
+    {
         int random = 0;
         random = (int)(Math.random() * (availableSeat.size()-1));
         return availableSeat.get(random);
@@ -866,5 +957,4 @@ public class Game {
     {
         return bettingAmountPosition.get(player.getSeat());
     }
-
 }

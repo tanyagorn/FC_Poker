@@ -23,5 +23,7 @@ public class CardOnHand {
         return cards.get(index);
     }
 
-
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
 }

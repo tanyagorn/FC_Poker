@@ -21,7 +21,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <VBox layoutX="160.0" layoutY="683.0" prefHeight="89.0" prefWidth="680.0" spacing="20.0">
+      <VBox layoutX="104.0" layoutY="683.0" prefHeight="89.0" prefWidth="680.0" spacing="20.0">
          <children>
             <HBox spacing="20.0">
                <children>
@@ -40,5 +40,6 @@
             </HBox>
          </children>
       </VBox>
+      <Button fx:id="redrawBtn" layoutX="805.0" layoutY="683.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="90.0" text="Redraw" />
    </children>
 </fx:root>
