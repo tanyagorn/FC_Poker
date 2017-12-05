@@ -28,9 +28,9 @@ public class Player implements Comparable<Player> {
     @FXML protected Label nameLabel;
     @FXML protected Label balanceLabel;
 
-    private int pair1 = 0;
-    private int pair2 = 0;
-    private int pair = 0;
+    protected int pair1 = 0;
+    protected int pair2 = 0;
+    protected int pair = 0;
     
     public Player() {
 
