@@ -32,8 +32,9 @@ import java.util.List;
 
 public class Game {
     private Pool pool;
-    private ArrayList<Player> players = new ArrayList<Player>();
+    private static ArrayList<Player> players = new ArrayList<Player>();
     private ArrayList<Player> activePlayers = new ArrayList<Player>();
+    private static ArrayList<Player> winners = new ArrayList<Player>();
     private String playerName;
     private int playerCount;
     private static Pane pane;
@@ -1038,4 +1039,6 @@ public class Game {
     {
         return bettingAmountPosition.get(player.getSeat());
     }
+
+
 }

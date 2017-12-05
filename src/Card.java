@@ -3,11 +3,13 @@ import java.awt.*;
 public class Card implements Comparable<Card>{
     private String cardLetter;
     private String cardType;
+    private int cardOrder = 0;
     private Point position;
 
-    public Card(String cardLetter, String cardType) {
+    public Card(String cardLetter, String cardType,int cardOrder) {
         this.cardLetter = cardLetter;
         this.cardType = cardType;
+        this.cardOrder = cardOrder;
     }
 
     public String getCardLetter() {
@@ -18,6 +20,7 @@ public class Card implements Comparable<Card>{
         return cardType;
     }
 
+    public int getCardOrder(){return cardOrder; }
     public Point getPosition() {
         return position;
     }

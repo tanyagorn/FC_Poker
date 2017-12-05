@@ -1,9 +1,11 @@
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 public class CardOnHand {
-    private ArrayList<Card> cards = new ArrayList<Card>();
+    protected ArrayList<Card> cards = new ArrayList<Card>();
 
     public void addCard(Card card, Point position, boolean visibility) {
         cards.add(card);
@@ -25,5 +27,18 @@ public class CardOnHand {
 
     public ArrayList<Card> getCards() {
         return cards;
+    }
+    public void sortCard()
+    {
+        Collections.sort(this.cards, new Comparator<Card>(){
+            public int compare(Card c1, Card c2)
+            {
+                return c2.getCardOrder() - c1.getCardOrder();
+            }
+        });
+    }
+    public int getorder(int card)
+    {
+        return cards.get(card).getCardOrder();
     }
 }
