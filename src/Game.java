@@ -1,6 +1,7 @@
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -192,11 +193,13 @@ public class Game {
             System.out.println("==================REMOVE==================");
             System.out.println("==================REMOVE==================");
             System.out.println("MUST REMOVE " + selectedCard);
+
             // remove GUI component
             for (HBox selected : selectedCard)
             {
                 player.removeImgCards(selected);
             }
+
             // remove card for this player
             String matchCard = null;
             ArrayList<Card> cards = player.getCardOnHand().getCards();
@@ -211,6 +214,11 @@ public class Game {
                     }
                 }
             }
+
+            // draw new card - update data in model
+            Card randCard = Deck.getInstance().getRandomCard();
+            player.addCardOnHand(randCard);
+
             System.out.println(player.getImgCards());
             System.out.println(player.getCardOnHand().getCards());
             state = "discardCard";
@@ -219,8 +227,8 @@ public class Game {
             System.out.println("==================END TURN==================");
             System.out.println("==================END TURN==================");
             System.out.println("==================END TURN==================");
-            subState++;
-            state = "draw";
+            //subState++;
+            state = "newDraw";
         });
 
         new Thread(new Runnable() {
@@ -265,16 +273,20 @@ public class Game {
         switch (state)
         {
             case "deal":
+                System.out.println("UPDATE - DEAL");
                 dealCard();
                 break;
             case "afterDeal":
-                delayTime(1000);
+                delayTime(500);
                 break;
             case "delayFold":
-                delayTime(1000);
+                delayTime(500);
                 break;
             case "delayDraw":
-                delayTime(1000);
+                delayTime(500);
+                break;
+            case "delayReturn":
+                delayTime(500);
                 break;
             case "betting":
                 System.out.println("UPDATE - BETTING PHASE : substate = " + subState);
@@ -347,7 +359,7 @@ public class Game {
                         subState = 0;
                         round = false;
                         drawOver = true;
-                        state = "betting";
+                        state = "afterDeal";
                         bettingRound(players.get(subState));
                     }
                     else if (subState < players.size())
@@ -361,6 +373,30 @@ public class Game {
             case "discardCard" :
                 System.out.println("UPDATE - DISCARD PHASE");
                 break;
+
+            case "newDraw":
+                System.out.println("UPDATE - NEW DRAW");
+                break;
+
+            case "newGame":
+                // Finish collect all cards, INIT NEW GAME
+                if (subState == players.size())
+                {
+                    subState = 0;
+                    round = false;
+                    drawOver = false;
+                    state = "deal";
+                    winner = null;
+                    pool.setPool(0);
+                    dealCard();
+                    for (Player player : players)
+                    {
+                        player.setActive(true);
+                    }
+                    System.out.println("UPDATE - MUST INIT NEW GAME");
+                }
+                break;
+
         }
 
         Platform.runLater(new Runnable() {
@@ -423,12 +459,16 @@ public class Game {
     {
         switch (state)
         {
+            // TODO: must not be pause but new game!
             case "winner" :
+                System.out.println("REDRAW : HAS WINNER");
                 winnerUI();
-                state = "pause";
+                subState = 0;
+                state = "newGame";
                 break;
 
             case "deal":
+                subState = 0;
                 for (Player player : players)
                 {
                     for (int i = 0; i < 5; i++)
@@ -440,7 +480,7 @@ public class Game {
                 break;
 
             case "afterDeal":
-                //roundLabel.setText("Betting Round");
+                roundLabel.setText("Betting Round");
                 roundLabel.setVisible(true);
                 state = "betting";
                 break;
@@ -470,15 +510,10 @@ public class Game {
 
             // won't need to do anything
             case "check" :
-//                if ((isBettingOver()) && (round))
-//                    state = "cumulate";
-//                else
-//                {
-                    updateBalanceUI(players.get(subState), "CHECK");
-                    state = "betting";
-                    subState++;
-                    System.out.println("CHECK : subState is added to " + subState);
-//                }
+                updateBalanceUI(players.get(subState), "CHECK");
+                state = "betting";
+                subState++;
+                System.out.println("CHECK : subState is added to " + subState);
                 break;
 
             // UpdateBalanceUI, also maybe display call
@@ -505,6 +540,7 @@ public class Game {
 
             case "cumulate" :
                 updatePoolUI();
+                enableSelectableCard();
                 // TODO: pause state must be changed to new game
                 if (drawOver)
                     state = "winner";
@@ -515,12 +551,11 @@ public class Game {
             // TODO: temporary pause state to see function of drawing card for actual player
             case "draw" :
                 roundLabel.setText("Drawing Round");
-                enableSelectableCard();
+                //enableSelectableCard();
                 break;
 
             case "discardCard" :
                 roundLabel.setText("Drawing Round");
-                enableSelectableCard();
                 System.out.print("DISCARD in UI; ");
                 discardUI();
                 state = "delayDraw";
@@ -531,10 +566,85 @@ public class Game {
                 {
                     node.setVisible(false);
                 }
+                // current player
+                if (players.get(subState) instanceof Bot)
+                    state = "newDraw";
+                else
+                    state = "draw";
+                break;
+
+            case "newDraw" :
+                updateCardOnHand(players.get(subState));
+                for (int i = 0; i < 5; i++)
+                {
+                    dealCardUI(players.get(subState), i);
+                }
                 state = "draw";
+                subState++;
+                break;
+
+            case "newGame" :
+                roundLabel.setText("");
+                returnCardUI(players.get(subState));
+                state = "delayReturn";
+                break;
+
+            case "delayReturn" :
+                for (Node node : nodes)
+                {
+                    node.setVisible(false);
+                }
+                state = "newGame";
+                subState++;
                 break;
         }
 
+    }
+
+    // Call all cards back to dealer, remove data of cards for this player
+    private void returnCardUI(Player player)
+    {
+        nodes.clear();
+        for (int i = pane.getChildren().size()-1; i >= 0; i--)
+        {
+            Node node = pane.getChildren().get(i);
+            for (HBox card : player.getImgCards())
+            {
+                if (node.equals(card))
+                {
+                    // Play animation of fold
+                    Path path = new Path();
+                    path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
+                    path.getElements().add(new LineTo(500,140));
+                    PathTransition pathTransition = new PathTransition();
+                    pathTransition.setPath(path);
+                    pathTransition.setNode(node);
+                    pathTransition.play();
+                    // Keep data for disable visibility later
+                    nodes.add(node);
+                }
+            }
+        }
+        // clear GUI, also card data for this player
+        player.getImgCards().clear();
+        player.getCardOnHand().getCards().clear();
+    }
+
+    private void updateCardOnHand(Player player)
+    {
+        System.out.println("REDRAW - UPDATE CARD ON HAND");
+        // remove all
+        for (HBox card : player.getImgCards())
+        {
+            for (int i = pane.getChildren().size()-1; i >= 0; i--)
+            {
+                if (pane.getChildren().get(i).equals(card))
+                {
+                    pane.getChildren().remove(pane.getChildren().get(i));
+                }
+            }
+        }
+        player.getImgCards().clear();
     }
 
     // discard any card within nodes array, don't need to know who is the owner
@@ -573,7 +683,7 @@ public class Game {
             {
                 for (HBox card : player.getImgCards())
                 {
-                    DropShadow dsHover = new DropShadow( 15, Color.rgb(243,188,46) );
+                    DropShadow dsHover = new DropShadow( 15, Color.rgb(0,0,255) );
                     card.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) -> {
                         if ( newValue )
                             card.setEffect(dsHover);
@@ -669,10 +779,9 @@ public class Game {
         }
         else
         {
+            // TODO: find winner here!!!!!!!!!!!!
             System.out.println("WINNER is not decided yet");
         }
-
-        // TODO: update roundLabel and call all cards back to dealer, then deal card again
     }
 
     private void updatePoolUI()
@@ -797,6 +906,7 @@ public class Game {
     // Deal card phase
     private void dealCard()
     {
+        Deck.getInstance().reInitDeck();
         // Each player getting five cards
         for (int i = 0; i < 5; i++) {
             for (Player player : players) {
@@ -906,7 +1016,7 @@ public class Game {
                 }
 
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -938,21 +1048,52 @@ public class Game {
 
                 System.out.println("; selected card = " + selectedCard);
 
+                // remove GUI component
+                for (HBox selected : selectedCard)
+                {
+                    player.removeImgCards(selected);
+                }
+                // remove card for this player
+                String matchCard = null;
+                ArrayList<Card> cards = player.getCardOnHand().getCards();
+                for (int i = cards.size()-1; i > -1; i--)
+                {
+                    matchCard = cards.get(i).getCardLetter() + "_" + cards.get(i).getCardType();
+                    for (HBox selected : selectedCard)
+                    {
+                        if (matchCard.equals(selected.getId()))
+                        {
+                            player.getCardOnHand().removeCard(cards.get(i));
+                        }
+                    }
+                }
+
+                // deal new card
+                for (int i = 0; i < selectedCard.size(); i++)
+                {
+                    Card randCard = Deck.getInstance().getRandomCard();
+                    player.addCardOnHand(randCard);
+                }
+
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
-                subState++;
+                //subState++;
                 state = "discardCard";
             }
             // Player's turn
             else  {
                 System.out.println("+++++++++++++++++DRAWING++++++++++++++++++++++");
+//                controlButton(true);
+//                redrawBtn.setDisable(false);
+//                endTurnBtn.setDisable(false);
                 state = "pause";
             }
         }
+        // if not use newDraw, must add one to substate to go to next player
         else
             subState++;
     }
@@ -1015,7 +1156,6 @@ public class Game {
         redrawBtn.setDisable(bool);
         endTurnBtn.setDisable(bool);
     }
-
 
     // In the end list of available seat will be left
     private int randomSeat()
