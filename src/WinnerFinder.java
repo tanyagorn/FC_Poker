@@ -2,10 +2,11 @@ import java.util.ArrayList;
 
 public class WinnerFinder
 {
-    private ArrayList<Player> winners = new ArrayList<Player>();
+    private static ArrayList<Player> winners = new ArrayList<Player>();
 
-    public ArrayList<Player> findWinner(ArrayList<Player> players)
+    public static ArrayList<Player> findWinner(ArrayList<Player> players)
     {
+        winners.clear();
         /**
          * After all player select the card sort card on hand of each player
          */
