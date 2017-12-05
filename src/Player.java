@@ -20,9 +20,10 @@ public class Player implements Comparable<Player> {
     protected int betBalance;
     protected int score;                // to choose decision
     protected boolean active;
-    protected Label betTag;
-    protected Label amountTag;
+    protected Label betTag;             // string
+    protected Label amountTag;          // amount of betting
     protected ArrayList<HBox> imgCards = new ArrayList<HBox>();
+
 
     @FXML protected VBox nameTag;
     @FXML protected Label nameLabel;

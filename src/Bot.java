@@ -61,15 +61,35 @@ public class Bot extends Player {
     @Override
     public String bettingTurn(List<String> availableOption) {
         patternOnhand();        // update score first
+
+
+
         System.out.println("====================================================");
+        System.out.println(availableOption);
         System.out.println(name + " has score = " + score);
         System.out.println("====================================================");
 
-//        System.out.println("available opt = " + availableOption);
-        int random = 0;
-        random = (int)(Math.random() * (availableOption.size()-1));
-        availableOption.get(random);
-        return availableOption.get(random);
+        String retString = "";
+        Random rn = new Random();
+        int randomNum =  rn.nextInt(2);
+        if (score > 0) {
+            randomNum = rn.nextInt(2) + 1;
+            if (availableOption.contains("check") && (availableOption.contains("bet")))
+            {
+                return availableOption.get(randomNum);
+            }
+            else if (availableOption.contains("check") && (availableOption.contains("raise")))
+            {
+                return availableOption.get(randomNum);
+            }
+            else if (availableOption.contains("call") && (availableOption.contains("raise")))
+            {
+                return availableOption.get(randomNum);
+            }
+        }
+
+        // getting here means score equal to zero, return random without third option
+        return availableOption.get(randomNum);
     }
 
     @Override

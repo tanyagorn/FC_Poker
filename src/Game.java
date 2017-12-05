@@ -50,7 +50,6 @@ public class Game {
     private static HashMap<Integer, Point> bettingAmountPosition = new HashMap<Integer, Point>();
 
     private String latestDecision;
-    private int highestBetBalance;
     private int additionalAmount;
     private boolean round;
     private ArrayList<HBox> selectedCard = new ArrayList<HBox>();   // keep selected card
@@ -58,6 +57,8 @@ public class Game {
     private Label poolLabel;
     private boolean drawOver;
     private Player winner;
+    private int highestBetBalance;
+    private int previousBet;
 
     @FXML private Label roundLabel;
     @FXML private Button fold;
@@ -126,7 +127,7 @@ public class Game {
         GraphicWindow.getStage().setScene(scene);
 
         pool = new Pool();
-        poolLabel = new Label("TEST");
+        poolLabel = new Label("");
         poolLabel.setLayoutX(490);
         poolLabel.setLayoutY(350);
         pane.getChildren().add(poolLabel);
@@ -180,8 +181,8 @@ public class Game {
         });
         raise.setOnAction((ActionEvent e) -> {
             int previousBetBalance = player.getBetBalance();
-            player.setBetBalance(player.getBetBalance() + Integer.parseInt(inputText.getText()));
-            player.setBalance(player.getBalance() - Integer.parseInt(inputText.getText()));
+            player.setBetBalance(getHighestBetBalance() + Integer.parseInt(inputText.getText()));
+            player.setBalance(player.getBalance() - player.getBetBalance());
             state = "raise";
         });
         bet.setOnAction((ActionEvent e) -> {
@@ -437,10 +438,8 @@ public class Game {
     {
         switch (state)
         {
-            // TODO: must not be pause but new game!
             case "winner" :
                 System.out.println("REDRAW : HAS WINNER");
-                // TODO: show card of every active user
                 winnerUI();
                 subState = 0;
                 state = "newGame";
@@ -466,6 +465,7 @@ public class Game {
                         dealCardUI(player, i);
                     }
                 }
+                System.out.println(poolLabel.getTranslateX() + "," + poolLabel.getTranslateY());
                 state = "afterDeal";
                 break;
 
@@ -477,6 +477,8 @@ public class Game {
 
             case "betting":
                 roundLabel.setText("Betting Round");
+                poolLabel.setTranslateX(0);
+                poolLabel.setTranslateY(0);
                 bettingUI(players.get(subState));
                 break;
 
@@ -484,6 +486,8 @@ public class Game {
             // then back to betting like others
             case "fold":
                 foldUI(players.get(subState));
+//                slider.setMin(0);
+//                slider.setMax(getLimitBet());
                 state = "delayFold";
                 break;
 
@@ -504,6 +508,8 @@ public class Game {
                 state = "betting";
                 subState++;
                 System.out.println("CHECK : subState is added to " + subState);
+                slider.setMin(0);
+                slider.setMax(getLimitBet());
                 break;
 
             // UpdateBalanceUI, also maybe display call
@@ -512,6 +518,8 @@ public class Game {
                 state = "betting";
                 subState++;
                 System.out.println("CALL : subState is added to " + subState);
+                slider.setMin(0);
+                slider.setMax(getLimitBet());
                 break;
 
             case "bet" :
@@ -519,6 +527,8 @@ public class Game {
                 state = "betting";
                 subState++;
                 System.out.println("BET : subState is added to " + subState);
+                slider.setMin(0);
+                slider.setMax(getLimitBet());
                 break;
 
             case "raise" :
@@ -526,6 +536,8 @@ public class Game {
                 state = "betting";
                 subState++;
                 System.out.println("RAISE : subState is added to " + subState);
+                slider.setMin(0);
+                slider.setMax(getLimitBet());
                 break;
 
             case "cumulate" :
@@ -541,7 +553,9 @@ public class Game {
             // TODO: temporary pause state to see function of drawing card for actual player
             case "draw" :
                 roundLabel.setText("Drawing Round");
-                //enableSelectableCard();
+                poolLabel.setTranslateX(0);
+                poolLabel.setTranslateY(0);
+                System.out.println(poolLabel.getTranslateX() + "," + poolLabel.getTranslateY());
                 break;
 
             case "discardCard" :
@@ -584,6 +598,7 @@ public class Game {
                 {
                     node.setVisible(false);
                 }
+                poolLabel.setText("0");
                 state = "newGame";
                 subState++;
                 break;
@@ -1006,25 +1021,64 @@ public class Game {
             if (player instanceof Bot)
             {
                 controlButton(true);
-//                System.out.print("RANDOM FOR " + player.getName() + " ; ");
                 latestDecision = player.bettingTurn(availableOption);
 
+                int betValue = 0;
+                Random rn = new Random();
+                int range = 0;
+                int randomNum = 0;
+                int previousBetBalance = 0;
                 switch (latestDecision)
                 {
-                    // TODO: change 40 to random amount of money
                     case "bet" :
-                        player.setBetBalance(player.getBetBalance() + 40);
+                        previousBetBalance = player.getBetBalance();
+                        range = player.getScore();
+                        randomNum =  rn.nextInt(range) + 1;
+
+                        betValue = player.getBalance() * (( randomNum * 10 ));
+                        betValue = betValue/100;
+
+                        if (betValue > getLimitBet())
+                            betValue = getLimitBet();
+
+                        player.setBetBalance(previousBetBalance + betValue);
+                        additionalAmount = player.getBetBalance() - previousBetBalance;
+                        player.setBalance(player.getBalance() - additionalAmount);
                         System.out.println(player.getName() + " make a bet");
                         break;
-                    // TODO: change 40 to random amount of money
                     case "raise" :
-                        player.setBetBalance(player.getBetBalance() + 40);
+                        previousBetBalance = player.getBetBalance();
+                        range = player.getScore();
+                        randomNum =  rn.nextInt(range) + 1;
+
+                        int current = player.getBalance() - highestBetBalance;
+                        if (current > 0)
+                        {
+                            betValue = current * (( randomNum * 10 ));
+                            betValue = betValue/100;
+                        }
+                        else
+                        {
+                            betValue = 0;
+                        }
+
+                        //current * bet
+                        if (betValue > getLimitBet()) {
+                            betValue = getLimitBet();
+                        }
+
+                        System.out.println("=======================================");
+                        System.out.println("bet value is raise : " + (highestBetBalance+betValue));
+                        System.out.println("=======================================");
+                        player.setBetBalance(highestBetBalance + betValue);
+                        additionalAmount = player.getBetBalance() - previousBetBalance;
+                        player.setBalance(player.getBalance() - additionalAmount);
                         System.out.println(player.getName() + " make a raise");
                         break;
                     // See bet balance of previous active player
                     // to determine amount
                     case "call" :
-                        int previousBetBalance = player.getBetBalance();
+                        previousBetBalance = player.getBetBalance();
                         player.setBetBalance(highestBetBalance);
                         additionalAmount = player.getBetBalance() - previousBetBalance;
                         player.setBalance(player.getBalance() - additionalAmount);
@@ -1211,6 +1265,22 @@ public class Game {
     public static Point getBettingAmountPosition(Player player)
     {
         return bettingAmountPosition.get(player.getSeat());
+    }
+
+
+    // Return min bet
+    private int getLimitBet()
+    {
+        int min = 10000;
+        for (Player player : players)
+        {
+            if (player.isActive())
+            {
+                if (player.getBalance() < min)
+                    min = player.getBalance();
+            }
+        }
+        return min;
     }
 
 
