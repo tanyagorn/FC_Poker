@@ -181,8 +181,17 @@ public class Game {
         });
         raise.setOnAction((ActionEvent e) -> {
             int previousBetBalance = player.getBetBalance();
-            player.setBetBalance(getHighestBetBalance() + Integer.parseInt(inputText.getText()));
-            player.setBalance(player.getBalance() - player.getBetBalance());
+            if (getHighestBetBalance() + Integer.parseInt(inputText.getText()) > player.getBalance())
+            {
+                player.setBetBalance(player.getBalance());
+                player.setBalance(0);
+            }
+            else
+            {
+                player.setBetBalance(getHighestBetBalance() + Integer.parseInt(inputText.getText()));
+                additionalAmount = player.getBetBalance() - previousBetBalance;
+                player.setBalance(player.getBalance() - additionalAmount);
+            }
             state = "raise";
         });
         bet.setOnAction((ActionEvent e) -> {
