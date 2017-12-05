@@ -228,7 +228,7 @@ public class Game {
             System.out.println("==================END TURN==================");
             System.out.println("==================END TURN==================");
             System.out.println("==================END TURN==================");
-            //subState++;
+            player.cardOnHand.sortCard();
             state = "newDraw";
         });
 
@@ -289,12 +289,15 @@ public class Game {
             case "delayReturn":
                 delayTime(500);
                 break;
+            case "delayDisplayCard":
+                delayTime(3000);
+                break;
             case "betting":
                 System.out.println("UPDATE - BETTING PHASE : substate = " + subState);
                 if (hasWinner())
                 {
                     System.out.println("WE GOT WINNER");
-                    state = "winner";
+                    state = "showCard";
                 }
                 // All players already take a turn, check if met terminating condition
                 // else re-betting round
@@ -347,7 +350,7 @@ public class Game {
                 System.out.println("UPDATE - DRAWING PHASE : substate = " + subState);
                 if (hasWinner())
                 {
-                    state = "winner";
+                    state = "showCard";
                 }
                 else
                 {
@@ -414,32 +417,6 @@ public class Game {
         });
     }
 
-    // Return null means there is no active player other than this player
-    // this player will be the winner
-    public Player findPreviousActivePlayer(Player player)
-    {
-        int currentIndex = players.indexOf(player);
-        int index = currentIndex - 1; // index of previous player
-        int round = 0;
-
-        for (int i = index; i > -2 && i < 5; i--)
-        {
-            if (i == index)
-                round++;
-            // Already loop through the whole array of players
-            // yet, not found any active player
-            if (round == 2)
-                break;
-            // round index back
-            if (i == -1)
-                i = 4;
-            // found previous player that still active in game
-            if (players.get(i).isActive())
-                return players.get(i);
-        }
-        return null;
-    }
-
     // Get highest bet balance for all player that still active in the game
     private int getHighestBetBalance()
     {
@@ -463,9 +440,21 @@ public class Game {
             // TODO: must not be pause but new game!
             case "winner" :
                 System.out.println("REDRAW : HAS WINNER");
+                // TODO: show card of every active user
                 winnerUI();
                 subState = 0;
                 state = "newGame";
+                break;
+
+            case "showCard" :
+                System.out.println("REDRAW - show card");
+                displayAllCardsUI();
+                state = "delayDisplayCard";
+                break;
+
+            case "delayDisplayCard" :
+                System.out.println("REDRAW - delay display card");
+                state = "winner";
                 break;
 
             case "deal":
@@ -544,7 +533,7 @@ public class Game {
                 enableSelectableCard();
                 // TODO: pause state must be changed to new game
                 if (drawOver)
-                    state = "winner";
+                    state = "showCard";
                 else
                     state = "draw";
                 break;
@@ -716,6 +705,30 @@ public class Game {
         }
     }
 
+    private void displayAllCardsUI()
+    {
+        for (Player player : players)
+        {
+            if (player.isActive())
+            {
+                for (HBox card : player.getImgCards())
+                {
+                    for (Node node : card.getChildren())
+                    {
+                        Group group = (Group)node;
+                        for(Node inGroup : group.getChildren())
+                        {
+                            if (inGroup.getId().equals("front"))
+                                inGroup.setVisible(true);
+                            else
+                                inGroup.setVisible(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // TODO: WINNER UI is not completed
     private void winnerUI()
     {
@@ -739,62 +752,62 @@ public class Game {
         // find position we must move to
         double x = 0.0;
         double y = 0.0;
-        if (winner != null)
-        {
-            switch (winner.getSeat())
-            {
-                case 1:
-                    x = +280;
-                    y = -120;
-                    break;
-                case 2:
-                    x = +280;
-                    y = +170;
-                    break;
-                case 3:
-                    x = 0;
-                    y = +230;
-                    break;
-                case 4:
-                    x = -280;
-                    y = +170;
-                    break;
-                case 5:
-                    x = -280;
-                    y = -120;
-                    break;
-            }
-        }
 
-        path.getElements().add(new LineTo(x, y));
-        PathTransition pathTransition = new PathTransition();
-        pathTransition.setPath(path);
-        pathTransition.setNode(poolLabel);
-        pathTransition.play();
-
-        // Update total balance for winner
-        if (winner != null)
+        // Find winner here
+        ArrayList<Player> activePlayers = new ArrayList<>();
+        for (Player player : players)
         {
-            winner.setBalance(winner.getBalance() + pool.getPool());
-            winner.setBalanceLabel();
+            if (player.isActive())
+                activePlayers.add(player);
         }
+        ArrayList<Player> winners = new ArrayList<>();
+        winners = WinnerFinder.findWinner(activePlayers);
+        if (winners.size() == 1)
+        {
+            winners.get(0).setBalance(winners.get(0).getBalance() + pool.getPool());
+            winners.get(0).setBalanceLabel();
+            Point point = getWinnerPosition(winners.get(0));
+
+            path.getElements().add(new LineTo(point.getX(), point.getY()));
+            PathTransition pathTransition = new PathTransition();
+            pathTransition.setPath(path);
+            pathTransition.setNode(poolLabel);
+            pathTransition.play();
+        }
+        // TODO: must split pool here
         else
         {
-            // TODO: find winner here!!!!!!!!!!!!
-            ArrayList<Player> activePlayers = new ArrayList<>();
-            for (Player player : players)
-            {
-                if (player.isActive())
-                    activePlayers.add(player);
-            }
-            ArrayList<Player> winners = new ArrayList<>();
-            winners = WinnerFinder.findWinner(activePlayers);
-            for (Player player : winners)
-            {
-                System.out.println(player.getName() + " cards: " + player.getCardOnHand().cards);
-            }
-            System.out.println("WINNER is not decided yet");
+
         }
+    }
+
+    private Point getWinnerPosition(Player player)
+    {
+        Point point = new Point();
+        switch (player.getSeat())
+        {
+            case 1:
+                point.x = +280;
+                point.y = -120;
+                break;
+            case 2:
+                point.x = +280;
+                point.y = +170;
+                break;
+            case 3:
+                point.x = 0;
+                point.y = +230;
+                break;
+            case 4:
+                point.x = -280;
+                point.y = +170;
+                break;
+            case 5:
+                point.x = -280;
+                point.y = -120;
+                break;
+        }
+        return point;
     }
 
     private void updatePoolUI()
@@ -860,6 +873,8 @@ public class Game {
         ImageView bottom = new ImageView(new javafx.scene.image.Image("img/" + player.getCard(i).getCardLetter()
                 + "_" + player.getCard(i).getCardType() + ".png"));
         ImageView top = new ImageView(new Image("img/back_card.png"));
+        bottom.setId("front");
+        top.setId("back");
 
         // set visibility
         if (player instanceof Bot)
@@ -1092,6 +1107,7 @@ public class Game {
                     Card randCard = Deck.getInstance().getRandomCard();
                     player.addCardOnHand(randCard);
                 }
+                player.cardOnHand.sortCard();
 
                 try {
                     Thread.sleep(1000);

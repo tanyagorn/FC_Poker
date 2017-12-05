@@ -2,20 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Bot.class" afterPath="$PROJECT_DIR$/out/production/Project/Bot.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Deck.class" afterPath="$PROJECT_DIR$/out/production/Project/Deck.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$1.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$2.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$3$1.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$3$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$3.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$3.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$4.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$5.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$5.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game.class" afterPath="$PROJECT_DIR$/out/production/Project/Game.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bot.java" afterPath="$PROJECT_DIR$/src/Bot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Deck.java" afterPath="$PROJECT_DIR$/src/Deck.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,26 +70,24 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="938" column="36" lean-forward="true" selection-start-line="938" selection-start-column="36" selection-end-line="938" selection-end-column="36" />
+            <state relative-caret-position="594">
+              <caret line="436" column="4" lean-forward="false" selection-start-line="436" selection-start-column="4" selection-end-line="436" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#Game#0;class#Game#0" expanded="false" />
                 <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-                <element signature="method#update#0;class#Game#0" expanded="false" />
-                <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
                 <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
                 <element signature="method#redraw#0;class#Game#0" expanded="false" />
                 <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
                 <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
                 <element signature="method#discardUI#0;class#Game#0" expanded="false" />
                 <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-                <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+                <element signature="method#getWinnerPosition#0;class#Game#0" expanded="false" />
                 <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
                 <element signature="method#foldUI#0;class#Game#0" expanded="false" />
                 <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-                <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
                 <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+                <element signature="method#dealCard#0;class#Game#0" expanded="false" />
                 <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
                 <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
                 <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -115,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="40" />
+              <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -134,7 +123,7 @@
       <file leaf-file-name="GraphicWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
+            <state relative-caret-position="605">
               <caret line="51" column="32" lean-forward="false" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
               <folding />
             </state>
@@ -170,8 +159,8 @@
       <file leaf-file-name="Bot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="75" column="42" lean-forward="true" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
+            <state relative-caret-position="188">
+              <caret line="64" column="59" lean-forward="true" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -213,8 +202,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>selectedcard</find>
-      <find>discardUI</find>
       <find>substate++</find>
       <find>avai</find>
       <find>round</find>
@@ -232,7 +219,6 @@
       <find>discardCard</find>
       <find>newDraw</find>
       <find>WE GOT WINNER</find>
-      <find>winnerUI</find>
       <find>setbalancela</find>
       <find>deal</find>
       <find>dealCardUI</find>
@@ -242,7 +228,10 @@
       <find>Deck</find>
       <find>hasWinner</find>
       <find>here</find>
+      <find>winnerUI</find>
+      <find>delayReturn</find>
       <find>winner</find>
+      <find>state = &quot;winner&quot;</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -273,10 +262,10 @@
         <option value="$PROJECT_DIR$/src/GraphicWindow.java" />
         <option value="$PROJECT_DIR$/src/CardOnHand.java" />
         <option value="$PROJECT_DIR$/src/Pool.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/Deck.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Bot.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/Game.java" />
       </list>
     </option>
@@ -535,7 +524,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.4943274" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22209567" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15034169" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -654,20 +643,18 @@
             <element signature="imports" expanded="true" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-            <element signature="method#update#0;class#Game#0" expanded="false" />
-            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
             <element signature="method#redraw#0;class#Game#0" expanded="false" />
             <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+            <element signature="method#getWinnerPosition#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -718,20 +705,18 @@
             <element signature="imports" expanded="true" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-            <element signature="method#update#0;class#Game#0" expanded="false" />
-            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
             <element signature="method#redraw#0;class#Game#0" expanded="false" />
             <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+            <element signature="method#getWinnerPosition#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -784,20 +769,18 @@
             <element signature="imports" expanded="true" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-            <element signature="method#update#0;class#Game#0" expanded="false" />
-            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
             <element signature="method#redraw#0;class#Game#0" expanded="false" />
             <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+            <element signature="method#getWinnerPosition#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -887,14 +870,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="51" column="32" lean-forward="false" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/CardOnHand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -913,42 +888,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-          <folding>
-            <marker date="1512477698235" expanded="true" signature="65990:66007" ph="..." />
-            <marker date="1512477698235" expanded="true" signature="65990:66025" ph="..." />
-            <marker date="1512477698235" expanded="true" signature="65990:66038" ph="..." />
-            <marker date="1512477698235" expanded="true" signature="65990:66053" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Deck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1627">
           <caret line="148" column="46" lean-forward="false" selection-start-line="148" selection-start-column="46" selection-end-line="148" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Bot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="75" column="42" lean-forward="true" selection-start-line="75" selection-start-column="42" selection-end-line="75" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -966,28 +910,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="18" lean-forward="true" selection-start-line="22" selection-start-column="18" selection-end-line="22" selection-end-column="18" />
+          <folding>
+            <marker date="1512482838691" expanded="true" signature="63833:63850" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="22" column="43" lean-forward="true" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Bot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="64" column="59" lean-forward="true" selection-start-line="64" selection-start-column="59" selection-end-line="64" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="51" column="32" lean-forward="false" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="938" column="36" lean-forward="true" selection-start-line="938" selection-start-column="36" selection-end-line="938" selection-end-column="36" />
+        <state relative-caret-position="594">
+          <caret line="436" column="4" lean-forward="false" selection-start-line="436" selection-start-column="4" selection-end-line="436" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-            <element signature="method#update#0;class#Game#0" expanded="false" />
-            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
             <element signature="method#redraw#0;class#Game#0" expanded="false" />
             <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+            <element signature="method#getWinnerPosition#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
