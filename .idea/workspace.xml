@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$1.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$3.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Deck.class" afterPath="$PROJECT_DIR$/out/production/Project/Deck.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game.class" afterPath="$PROJECT_DIR$/out/production/Project/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$4.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Bot.class" afterPath="$PROJECT_DIR$/out/production/Project/Bot.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$3$1.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$3$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$2.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Bot.java" afterPath="$PROJECT_DIR$/src/Bot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Project/Game$5.class" afterPath="$PROJECT_DIR$/out/production/Project/Game$5.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Deck.java" afterPath="$PROJECT_DIR$/src/Deck.java" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -79,29 +64,26 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12747">
-              <caret line="1042" column="0" lean-forward="false" selection-start-line="1042" selection-start-column="0" selection-end-line="1042" selection-end-column="0" />
+            <state relative-caret-position="2647">
+              <caret line="933" column="9" lean-forward="true" selection-start-line="933" selection-start-column="9" selection-end-line="933" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1041#1049#0" expanded="true" />
-                <element signature="e#1112#1120#0" expanded="true" />
-                <element signature="e#1184#1192#0" expanded="true" />
-                <element signature="e#1729#1745#0" expanded="true" />
-                <element signature="e#1827#1843#0" expanded="true" />
-                <element signature="e#2035#2041#0" expanded="true" />
-                <element signature="e#2110#2116#0" expanded="true" />
-                <element signature="method#toString#0;class#3955:4533" expanded="false" />
+                <element signature="method#Game#0;class#Game#0" expanded="false" />
                 <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
+                <element signature="method#update#0;class#Game#0" expanded="false" />
                 <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
                 <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
+                <element signature="method#redraw#0;class#Game#0" expanded="false" />
+                <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
+                <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
                 <element signature="method#discardUI#0;class#Game#0" expanded="false" />
                 <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
+                <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
                 <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
                 <element signature="method#foldUI#0;class#Game#0" expanded="false" />
                 <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
                 <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
                 <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
-                <element signature="method#dealCard#0;class#Game#0" expanded="false" />
                 <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
                 <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
                 <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -117,11 +99,29 @@
       <file leaf-file-name="WinnerFinder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-756">
-              <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
-              <folding>
-                <element signature="e#110#118#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-4038">
+              <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Deck.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3024">
+              <caret line="148" column="46" lean-forward="false" selection-start-line="148" selection-start-column="46" selection-end-line="148" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GraphicWindow.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1161">
+              <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -142,25 +142,11 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="35" />
+            <state relative-caret-position="0">
+              <caret line="241" column="22" lean-forward="false" selection-start-line="241" selection-start-column="21" selection-end-line="241" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#Player#1;class#Player#0" expanded="false" />
                 <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
-                <element signature="method#compareTo#0;class#Player#0" expanded="false" />
-                <element signature="e#4648#4649#0" expanded="true" />
-                <element signature="e#4675#4676#0" expanded="true" />
-                <element signature="e#4711#4712#0" expanded="true" />
-                <element signature="e#4739#4740#0" expanded="true" />
-                <element signature="e#4776#4777#0" expanded="true" />
-                <element signature="e#4804#4805#0" expanded="true" />
-                <element signature="method#checkStraight#0;class#Player#0" expanded="false" />
-                <element signature="method#checkflush#0;class#Player#0" expanded="false" />
-                <element signature="method#checkfullhouse#0;class#Player#0" expanded="false" />
-                <element signature="method#checknofkind#0;class#Player#0" expanded="false" />
-                <element signature="method#checktwopair#0;class#Player#0" expanded="false" />
-                <element signature="method#checklowStraight#0;class#Player#0" expanded="false" />
                 <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
               </folding>
             </state>
@@ -170,10 +156,11 @@
       <file leaf-file-name="Bot.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Bot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="2457">
+              <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2669#2675#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -182,27 +169,11 @@
       <file leaf-file-name="CardOnHand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CardOnHand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+            <state relative-caret-position="378">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#620#621#0" expanded="true" />
-                <element signature="e#648#649#0" expanded="true" />
-                <element signature="e#805#806#0" expanded="true" />
-                <element signature="e#881#882#0" expanded="true" />
-                <element signature="e#939#940#0" expanded="true" />
-                <element signature="e#992#993#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="1106" column="52" lean-forward="true" selection-start-line="1106" selection-start-column="52" selection-end-line="1106" selection-end-column="52" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -210,19 +181,12 @@
       <file leaf-file-name="Card.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Card.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Deck.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Deck.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-315">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="441">
+              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="e#665#666#0" expanded="true" />
+                <element signature="e#705#706#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -299,11 +263,11 @@
         <option value="$PROJECT_DIR$/src/GraphicWindow.java" />
         <option value="$PROJECT_DIR$/src/CardOnHand.java" />
         <option value="$PROJECT_DIR$/src/Pool.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/Deck.java" />
+        <option value="$PROJECT_DIR$/src/Game.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/src/Bot.java" />
-        <option value="$PROJECT_DIR$/src/Game.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -314,7 +278,7 @@
     </treeState>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="952" />
     <option name="width" value="976" />
     <option name="height" value="1038" />
@@ -338,31 +302,31 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="FC_Poker" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FC_Poker" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="FC_Poker" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FC_Poker" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
               <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="FC_Poker" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FC_Poker" type="462c0819:PsiDirectoryNode" />
+              <item name="Project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Project" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,92 +520,37 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1810934" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.4943274" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21753986" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16165413" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39863327" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.4943274" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39863327" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1810934" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.50567263" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22209567" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24704619" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.4943274" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22323462" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12298603" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39863327" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32915717" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26309794" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297414" sideWeight="0.50567263" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921588" sideWeight="0.50567263" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19548872" sideWeight="0.6703755" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -667,21 +576,7 @@
           <caret line="16" column="5" lean-forward="false" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#Player#1;class#Player#0" expanded="false" />
             <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
-            <element signature="method#compareTo#0;class#Player#0" expanded="false" />
-            <element signature="e#4648#4649#0" expanded="true" />
-            <element signature="e#4675#4676#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4739#4740#0" expanded="true" />
-            <element signature="e#4776#4777#0" expanded="true" />
-            <element signature="e#4804#4805#0" expanded="true" />
-            <element signature="method#checkStraight#0;class#Player#0" expanded="false" />
-            <element signature="method#checkflush#0;class#Player#0" expanded="false" />
-            <element signature="method#checkfullhouse#0;class#Player#0" expanded="false" />
-            <element signature="method#checknofkind#0;class#Player#0" expanded="false" />
-            <element signature="method#checktwopair#0;class#Player#0" expanded="false" />
-            <element signature="method#checklowStraight#0;class#Player#0" expanded="false" />
             <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
           </folding>
         </state>
@@ -710,25 +605,22 @@
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1041#1049#0" expanded="true" />
-            <element signature="e#1112#1120#0" expanded="true" />
-            <element signature="e#1184#1192#0" expanded="true" />
-            <element signature="e#1729#1745#0" expanded="true" />
-            <element signature="e#1827#1843#0" expanded="true" />
-            <element signature="e#2035#2041#0" expanded="true" />
-            <element signature="e#2110#2116#0" expanded="true" />
-            <element signature="method#toString#0;class#3955:4533" expanded="false" />
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
+            <element signature="method#update#0;class#Game#0" expanded="false" />
             <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
+            <element signature="method#redraw#0;class#Game#0" expanded="false" />
+            <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
+            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
             <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -746,21 +638,7 @@
           <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#Player#1;class#Player#0" expanded="false" />
             <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
-            <element signature="method#compareTo#0;class#Player#0" expanded="false" />
-            <element signature="e#4648#4649#0" expanded="true" />
-            <element signature="e#4675#4676#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4739#4740#0" expanded="true" />
-            <element signature="e#4776#4777#0" expanded="true" />
-            <element signature="e#4804#4805#0" expanded="true" />
-            <element signature="method#checkStraight#0;class#Player#0" expanded="false" />
-            <element signature="method#checkflush#0;class#Player#0" expanded="false" />
-            <element signature="method#checkfullhouse#0;class#Player#0" expanded="false" />
-            <element signature="method#checknofkind#0;class#Player#0" expanded="false" />
-            <element signature="method#checktwopair#0;class#Player#0" expanded="false" />
-            <element signature="method#checklowStraight#0;class#Player#0" expanded="false" />
             <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
           </folding>
         </state>
@@ -789,25 +667,22 @@
           <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1041#1049#0" expanded="true" />
-            <element signature="e#1112#1120#0" expanded="true" />
-            <element signature="e#1184#1192#0" expanded="true" />
-            <element signature="e#1729#1745#0" expanded="true" />
-            <element signature="e#1827#1843#0" expanded="true" />
-            <element signature="e#2035#2041#0" expanded="true" />
-            <element signature="e#2110#2116#0" expanded="true" />
-            <element signature="method#toString#0;class#3955:4533" expanded="false" />
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
+            <element signature="method#update#0;class#Game#0" expanded="false" />
             <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
+            <element signature="method#redraw#0;class#Game#0" expanded="false" />
+            <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
+            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
             <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -834,21 +709,7 @@
           <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#Player#1;class#Player#0" expanded="false" />
             <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
-            <element signature="method#compareTo#0;class#Player#0" expanded="false" />
-            <element signature="e#4648#4649#0" expanded="true" />
-            <element signature="e#4675#4676#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4739#4740#0" expanded="true" />
-            <element signature="e#4776#4777#0" expanded="true" />
-            <element signature="e#4804#4805#0" expanded="true" />
-            <element signature="method#checkStraight#0;class#Player#0" expanded="false" />
-            <element signature="method#checkflush#0;class#Player#0" expanded="false" />
-            <element signature="method#checkfullhouse#0;class#Player#0" expanded="false" />
-            <element signature="method#checknofkind#0;class#Player#0" expanded="false" />
-            <element signature="method#checktwopair#0;class#Player#0" expanded="false" />
-            <element signature="method#checklowStraight#0;class#Player#0" expanded="false" />
             <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
           </folding>
         </state>
@@ -870,25 +731,22 @@
           <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1041#1049#0" expanded="true" />
-            <element signature="e#1112#1120#0" expanded="true" />
-            <element signature="e#1184#1192#0" expanded="true" />
-            <element signature="e#1729#1745#0" expanded="true" />
-            <element signature="e#1827#1843#0" expanded="true" />
-            <element signature="e#2035#2041#0" expanded="true" />
-            <element signature="e#2110#2116#0" expanded="true" />
-            <element signature="method#toString#0;class#3955:4533" expanded="false" />
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
             <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
+            <element signature="method#update#0;class#Game#0" expanded="false" />
             <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
             <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
+            <element signature="method#redraw#0;class#Game#0" expanded="false" />
+            <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
             <element signature="method#discardUI#0;class#Game#0" expanded="false" />
             <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
+            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
             <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
             <element signature="method#foldUI#0;class#Game#0" expanded="false" />
             <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
             <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
             <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
             <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
             <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
             <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
@@ -951,6 +809,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="840">
           <caret line="40" column="20" lean-forward="true" selection-start-line="40" selection-start-column="20" selection-end-line="40" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -958,14 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="672">
           <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -977,27 +828,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="51" column="32" lean-forward="false" selection-start-line="51" selection-start-column="32" selection-end-line="51" selection-end-column="32" />
+        <state relative-caret-position="441">
+          <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Deck.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3024">
+          <caret line="148" column="46" lean-forward="false" selection-start-line="148" selection-start-column="46" selection-end-line="148" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CardOnHand.java">
+    <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="29" column="5" lean-forward="true" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        <state relative-caret-position="2647">
+          <caret line="933" column="9" lean-forward="true" selection-start-line="933" selection-start-column="9" selection-end-line="933" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#620#621#0" expanded="true" />
-            <element signature="e#648#649#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
-            <element signature="e#881#882#0" expanded="true" />
-            <element signature="e#939#940#0" expanded="true" />
-            <element signature="e#992#993#0" expanded="true" />
+            <element signature="method#Game#0;class#Game#0" expanded="false" />
+            <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
+            <element signature="method#update#0;class#Game#0" expanded="false" />
+            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
+            <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
+            <element signature="method#redraw#0;class#Game#0" expanded="false" />
+            <element signature="method#returnCardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updateCardOnHand#0;class#Game#0" expanded="false" />
+            <element signature="method#discardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
+            <element signature="method#winnerUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
+            <element signature="method#foldUI#0;class#Game#0" expanded="false" />
+            <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
+            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
+            <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
+            <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
+            <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
+            <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
+            <element signature="method#getLowestBalance#0;class#Game#0" expanded="false" />
+            <element signature="method#delayTime#0;class#Game#0" expanded="false" />
+            <element signature="method#controlButton#0;class#Game#0" expanded="false" />
+            <element signature="method#randomSeat#0;class#Game#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="241" column="22" lean-forward="false" selection-start-line="241" selection-start-column="21" selection-end-line="241" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
+            <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4038">
+          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="40" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,101 +907,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/src/Card.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="1106" column="52" lean-forward="true" selection-start-line="1106" selection-start-column="52" selection-end-line="1106" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Deck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/WinnerFinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-756">
-          <caret line="6" column="37" lean-forward="false" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+        <state relative-caret-position="441">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
-            <element signature="e#110#118#0" expanded="true" />
+            <element signature="e#665#666#0" expanded="true" />
+            <element signature="e#705#706#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CardOnHand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Bot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+        <state relative-caret-position="2457">
+          <caret line="119" column="0" lean-forward="true" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2669#2675#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/GraphicWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Player#1;class#Player#0" expanded="false" />
-            <element signature="method#setBalanceLabel#0;class#Player#0" expanded="false" />
-            <element signature="method#compareTo#0;class#Player#0" expanded="false" />
-            <element signature="e#4648#4649#0" expanded="true" />
-            <element signature="e#4675#4676#0" expanded="true" />
-            <element signature="e#4711#4712#0" expanded="true" />
-            <element signature="e#4739#4740#0" expanded="true" />
-            <element signature="e#4776#4777#0" expanded="true" />
-            <element signature="e#4804#4805#0" expanded="true" />
-            <element signature="method#checkStraight#0;class#Player#0" expanded="false" />
-            <element signature="method#checkflush#0;class#Player#0" expanded="false" />
-            <element signature="method#checkfullhouse#0;class#Player#0" expanded="false" />
-            <element signature="method#checknofkind#0;class#Player#0" expanded="false" />
-            <element signature="method#checktwopair#0;class#Player#0" expanded="false" />
-            <element signature="method#checklowStraight#0;class#Player#0" expanded="false" />
-            <element signature="method#patternOnhand#0;class#Player#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12747">
-          <caret line="1042" column="0" lean-forward="false" selection-start-line="1042" selection-start-column="0" selection-end-line="1042" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1041#1049#0" expanded="true" />
-            <element signature="e#1112#1120#0" expanded="true" />
-            <element signature="e#1184#1192#0" expanded="true" />
-            <element signature="e#1729#1745#0" expanded="true" />
-            <element signature="e#1827#1843#0" expanded="true" />
-            <element signature="e#2035#2041#0" expanded="true" />
-            <element signature="e#2110#2116#0" expanded="true" />
-            <element signature="method#toString#0;class#3955:4533" expanded="false" />
-            <element signature="method#isBettingOver#0;class#Game#0" expanded="false" />
-            <element signature="method#findPreviousActivePlayer#0;class#Game#0" expanded="false" />
-            <element signature="method#getHighestBetBalance#0;class#Game#0" expanded="false" />
-            <element signature="method#discardUI#0;class#Game#0" expanded="false" />
-            <element signature="method#enableSelectableCard#0;class#Game#0" expanded="false" />
-            <element signature="method#updatePoolUI#0;class#Game#0" expanded="false" />
-            <element signature="method#foldUI#0;class#Game#0" expanded="false" />
-            <element signature="method#updateBalanceUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCardUI#0;class#Game#0" expanded="false" />
-            <element signature="method#bettingUI#0;class#Game#0" expanded="false" />
-            <element signature="method#dealCard#0;class#Game#0" expanded="false" />
-            <element signature="method#bettingRound#0;class#Game#0" expanded="false" />
-            <element signature="method#drawingRound#0;class#Game#0" expanded="false" />
-            <element signature="method#hasWinner#0;class#Game#0" expanded="false" />
-            <element signature="method#getLowestBalance#0;class#Game#0" expanded="false" />
-            <element signature="method#delayTime#0;class#Game#0" expanded="false" />
-            <element signature="method#controlButton#0;class#Game#0" expanded="false" />
-            <element signature="method#randomSeat#0;class#Game#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="-1161">
+          <caret line="20" column="31" lean-forward="true" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>

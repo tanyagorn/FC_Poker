@@ -89,11 +89,71 @@ public class Deck {
         return instance;
     }
 
+    public void reInitDeck()
+    {
+        cards.clear();
+        cards.add(new Card("2", "clubs",1));
+        cards.add(new Card("3", "clubs",2));
+        cards.add(new Card("4", "clubs",3));
+        cards.add(new Card("5", "clubs",4));
+        cards.add(new Card("6", "clubs",5));
+        cards.add(new Card("7", "clubs",6));
+        cards.add(new Card("8", "clubs",7));
+        cards.add(new Card("9", "clubs",8));
+        cards.add(new Card("10", "clubs",9));
+        cards.add(new Card("J", "clubs",10));
+        cards.add(new Card("Q", "clubs",11));
+        cards.add(new Card("K", "clubs",12));
+        cards.add(new Card("A", "clubs",13));
+
+        cards.add(new Card("2", "diamonds",1));
+        cards.add(new Card("3", "diamonds",2));
+        cards.add(new Card("4", "diamonds",3));
+        cards.add(new Card("5", "diamonds",4));
+        cards.add(new Card("6", "diamonds",5));
+        cards.add(new Card("7", "diamonds",6));
+        cards.add(new Card("8", "diamonds",7));
+        cards.add(new Card("9", "diamonds",8));
+        cards.add(new Card("10", "diamonds",9));
+        cards.add(new Card("J", "diamonds",10));
+        cards.add(new Card("Q", "diamonds",11));
+        cards.add(new Card("K", "diamonds",12));
+        cards.add(new Card("A", "diamonds",13));
+
+        cards.add(new Card("2", "hearts",1));
+        cards.add(new Card("3", "hearts",2));
+        cards.add(new Card("4", "hearts",3));
+        cards.add(new Card("5", "hearts",4));
+        cards.add(new Card("6", "hearts",5));
+        cards.add(new Card("7", "hearts",6));
+        cards.add(new Card("8", "hearts",7));
+        cards.add(new Card("9", "hearts",8));
+        cards.add(new Card("10", "hearts",9));
+        cards.add(new Card("J", "hearts",10));
+        cards.add(new Card("Q", "hearts",11));
+        cards.add(new Card("K", "hearts",12));
+        cards.add(new Card("A", "hearts",13));
+
+        cards.add(new Card("2", "spades",1));
+        cards.add(new Card("3", "spades",2));
+        cards.add(new Card("4", "spades",3));
+        cards.add(new Card("5", "spades",4));
+        cards.add(new Card("6", "spades",5));
+        cards.add(new Card("7", "spades",6));
+        cards.add(new Card("8", "spades",7));
+        cards.add(new Card("9", "spades",8));
+        cards.add(new Card("10", "spades",9));
+        cards.add(new Card("J", "spades",10));
+        cards.add(new Card("Q", "spades",11));
+        cards.add(new Card("K", "spades",12));
+        cards.add(new Card("A", "spades",13));
+    }
 
     public void removeCard(Card card) {
         cards.remove(card);
     }
 
+    // Automatically remove that card from Deck
     public Card getRandomCard() {
         Random rand = new Random();
         int random = rand.nextInt((cards.size()-1) + 1);

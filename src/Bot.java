@@ -60,6 +60,11 @@ public class Bot extends Player {
     // TODO: calculating percent of winning then making a decision
     @Override
     public String bettingTurn(List<String> availableOption) {
+        patternOnhand();        // update score first
+        System.out.println("====================================================");
+        System.out.println(name + " has score = " + score);
+        System.out.println("====================================================");
+
 //        System.out.println("available opt = " + availableOption);
         int random = 0;
         random = (int)(Math.random() * (availableOption.size()-1));
@@ -70,9 +75,49 @@ public class Bot extends Player {
     @Override
     public ArrayList<HBox> drawingTurn() {
         ArrayList<HBox> selectedCards = new ArrayList<>();
-        int random = 0;
-        random = (int)(Math.random() * (imgCards.size()-1));
-        selectedCards.add(imgCards.get(random));
+        ArrayList<Card> rmvcard = new ArrayList<Card>();
+        int i = 0;
+        if(score == 0)//Mean has nothing
+        {
+            for( i = 1;i<5;i++) {
+                rmvcard.add(cardOnHand.getCard(i));
+                System.out.println("+-+-+-+-+-+--+--+--++-+--+---++-+--+-+--+-+--+--+--+--+-");
+                System.out.println("Remove card : "+cardOnHand.getCard(i));
+                System.out.println("+-+-+-+-+-+--+--+--++-+--+---++-+--+-+--+-+--+--+--+--+-");
+            }
+        }
+        if(score == 1 || score == 3)//Mean pair or 3 of kind
+        {
+            for(i = 0;i<5;i++)
+            {
+                if(cardOnHand.getCard(i).getCardOrder() != pair)
+                {
+                    rmvcard.add(cardOnHand.getCard(i));
+                }
+            }
+        }
+        if(score == 2)//mean two pair
+        {
+            for(i = 0;i<5;i++)
+            {
+                if(cardOnHand.getCard(i).getCardOrder() != pair1 ||cardOnHand.getCard(i).getCardOrder() != pair2 )
+                {
+                    rmvcard.add(cardOnHand.getCard(i));
+                }
+            }
+        }
+
+        String matchCardID = "";
+        for (Card card : rmvcard)
+        {
+            matchCardID = card.getCardLetter() + "_" + card.getCardType();
+            for (HBox hbox : imgCards)
+            {
+                if (hbox.getId().equals(matchCardID))
+                    selectedCards.add(hbox);
+            }
+        }
+
         return selectedCards;
     }
 
