@@ -1,8 +1,8 @@
 public class Pool {
     private int pool;
 
-    public Pool(int pool) {
-        this.pool = pool;
+    public Pool() {
+        this.pool = 0;
     }
 
     public int getPool() {

@@ -1,11 +1,13 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -58,11 +60,20 @@ public class Bot extends Player {
     // TODO: calculating percent of winning then making a decision
     @Override
     public String bettingTurn(List<String> availableOption) {
-        System.out.println("available opt = " + availableOption);
+//        System.out.println("available opt = " + availableOption);
         int random = 0;
         random = (int)(Math.random() * (availableOption.size()-1));
         availableOption.get(random);
         return availableOption.get(random);
+    }
+
+    @Override
+    public ArrayList<HBox> drawingTurn() {
+        ArrayList<HBox> selectedCards = new ArrayList<>();
+        int random = 0;
+        random = (int)(Math.random() * (imgCards.size()-1));
+        selectedCards.add(imgCards.get(random));
+        return selectedCards;
     }
 
 }

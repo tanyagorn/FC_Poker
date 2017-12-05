@@ -22,7 +22,6 @@ public class Player implements Comparable<Player> {
     protected boolean active;
     protected Label betTag;
     protected Label amountTag;
-    //protected ArrayList<ImageView> imageCards = new ArrayList<ImageView>();
     protected ArrayList<HBox> imgCards = new ArrayList<HBox>();
 
     @FXML protected VBox nameTag;
@@ -152,24 +151,8 @@ public class Player implements Comparable<Player> {
 
     public void setBalanceLabel() {
         this.balanceLabel.setText(Integer.toString(balance));
+        System.out.println("SET BALANCE LABEL for " + name + " TO: " + balance);
     }
-
-//    public ArrayList<ImageView> getImageCards() {
-//        return imageCards;
-//    }
-//
-//    public ImageView getImageCards(int i) {
-//        return this.imageCards.get(i);
-//    }
-//
-//
-//    public void addImageCards(ImageView img) {
-//        this.imageCards.add(img);
-//    }
-//
-//    public void removeImageCards(ImageView img) {
-//        this.imageCards.remove(img);
-//    }
 
     public void addImgCards(HBox img)
     {
@@ -183,6 +166,12 @@ public class Player implements Comparable<Player> {
     public void removeImgCards(HBox card)
     {
         this.imgCards.remove(card);
+    }
+
+    // drawingTurn of actual player will be determined in Game class
+    public ArrayList<HBox> drawingTurn()
+    {
+        return null;
     }
 
     @Override
