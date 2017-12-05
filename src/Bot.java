@@ -62,8 +62,6 @@ public class Bot extends Player {
     public String bettingTurn(List<String> availableOption) {
         patternOnhand();        // update score first
 
-
-
         System.out.println("====================================================");
         System.out.println(availableOption);
         System.out.println(name + " has score = " + score);
@@ -71,20 +69,33 @@ public class Bot extends Player {
 
         String retString = "";
         Random rn = new Random();
-        int randomNum =  rn.nextInt(2);
+        int randomNum =  rn.nextInt(2);  // random between 0 and 1
         if (score > 0) {
+            // Decide to choose between two options
             randomNum = rn.nextInt(2) + 1;
             if (availableOption.contains("check") && (availableOption.contains("bet")))
             {
-                return availableOption.get(randomNum);
+                randomNum = rn.nextInt(11) + 1;     // random between 1 and 10
+                if (randomNum < score + 5)                // add possibility of choosing bet
+                    return "bet";
+                else
+                    return "check";
             }
             else if (availableOption.contains("check") && (availableOption.contains("raise")))
             {
-                return availableOption.get(randomNum);
+                randomNum = rn.nextInt(11) + 1;     // random between 1 and 10
+                if (randomNum < score)
+                    return "raise";
+                else
+                    return "check";
             }
             else if (availableOption.contains("call") && (availableOption.contains("raise")))
             {
-                return availableOption.get(randomNum);
+                randomNum = rn.nextInt(11) + 1;     // random between 1 and 10
+                if (randomNum < score)
+                    return "raise";
+                else
+                    return "call";
             }
         }
 
