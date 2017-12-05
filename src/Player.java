@@ -18,7 +18,7 @@ public class Player implements Comparable<Player> {
     protected CardOnHand cardOnHand = new CardOnHand();
     protected int balance;
     protected int betBalance;
-    protected int score;
+    protected int score;                // to choose decision
     protected boolean active;
     protected Label betTag;
     protected Label amountTag;

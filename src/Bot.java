@@ -60,6 +60,11 @@ public class Bot extends Player {
     // TODO: calculating percent of winning then making a decision
     @Override
     public String bettingTurn(List<String> availableOption) {
+        patternOnhand();        // update score first
+        System.out.println("====================================================");
+        System.out.println(name + " has score = " + score);
+        System.out.println("====================================================");
+
 //        System.out.println("available opt = " + availableOption);
         int random = 0;
         random = (int)(Math.random() * (availableOption.size()-1));
