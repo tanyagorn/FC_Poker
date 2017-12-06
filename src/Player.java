@@ -1,194 +1,347 @@
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Comparable<Player> {
+/**
+ * Player class keep information both model and view
+ * and provide getter/setter method to keep
+ * model and view consistent
+ *
+ * Created by TC group, 6 December 2017
+ */
+public class Player implements Comparable<Player>
+{
+    /** name of player */
     protected String name;
+
+    /** seat number */
     protected int seat;
+
+    /** seat position */
     protected Point position;
+
+    /** cards belonging to this player */
     protected CardOnHand cardOnHand = new CardOnHand();
+
+    /** holding total balance */
     protected int balance;
+
+    /** holding betting balance for each betting turn */
     protected int betBalance;
-    protected int score;                // to choose decision
+
+    /** rate of card which will be used for choosing decision in betting turn */
+    protected int score;
+
+    /** holding status of this player */
     protected boolean active;
-    protected Label betTag;             // string
-    protected Label amountTag;          // amount of betting
+
+    /** GUI component; display which decision is taken */
+    protected Label betTag;
+
+    /** GUI component; display amount of money */
+    protected Label amountTag;
+
+    /** GUI components; holding GUI object represent each card
+     * for this player, so we can remove it later */
     protected ArrayList<HBox> imgCards = new ArrayList<HBox>();
 
-
+    /** GUI components loading from .FXML file */
     @FXML protected VBox nameTag;
     @FXML protected Label nameLabel;
     @FXML protected Label balanceLabel;
 
+    /** temporary variable to be used in making decision for betting */
     protected int pair1 = 0;
     protected int pair2 = 0;
     protected int pair = 0;
-    
-    public Player() {
+
+    /**
+     * Default constructor of player
+     * */
+    public Player()
+    {
 
     }
 
-    public Player(String name, int seat, Point position, int balance, boolean active) {
+    /**
+     * Constructor to create instance of player
+     * @param name      string of name
+     * @param seat      seat number
+     * @param position  position of seat number
+     * @param balance   intial balance
+     * @param active    status of player
+     */
+    public Player(String name, int seat, Point position, int balance, boolean active)
+    {
+        // Set initial value
         this.name = name;
         this.seat = seat;
         this.position = position;
         this.balance = balance;
         this.active = active;
 
+        // Load .fxml file to create GUI represents this player
         VBox vBox = new VBox();
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Player.fxml"));
         fxmlLoader.setRoot(vBox);
         fxmlLoader.setController(this);
 
-        try {
+        try
+        {
             fxmlLoader.load();
-        } catch (IOException exception) {
+        }
+        catch (IOException exception)
+        {
             throw new RuntimeException(exception);
         }
 
         Game.getPane().getChildren().add(vBox);
-
         vBox.setLayoutX(position.getX() - (180/2));
         vBox.setLayoutY(position.getY());
 
+        // Set GUI component's value
         nameLabel.setText(name);
         balanceLabel.setText(Integer.toString(balance));
         betTag = new Label();
         betTag.setLayoutX(Game.getBettingTagPosition(this).getX());
         betTag.setLayoutY(Game.getBettingTagPosition(this).getY());
-
         amountTag = new Label();
         amountTag.setLayoutX(Game.getBettingAmountPosition(this).getX());
         amountTag.setLayoutY(Game.getBettingAmountPosition(this).getY());
         Game.getPane().getChildren().addAll(betTag, amountTag);
-
     }
 
-    public String getName() {
+    /**
+     * get player's name
+     * @return name of player
+     */
+    public String getName()
+    {
         return name;
     }
 
-    public int getSeat() {
+    /**
+     * get seat number
+     * @return seat number
+     */
+    public int getSeat()
+    {
         return seat;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getBalance() {
+    /**
+     * get balance
+     * @return current balance
+     */
+    public int getBalance()
+    {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    /**
+     * update balance value
+     * @param balance new balance value
+     */
+    public void setBalance(int balance)
+    {
         this.balance = balance;
     }
 
-    public int getBetBalance() {
+    /**
+     * get bet balance
+     * @return bet balance
+     */
+    public int getBetBalance()
+    {
         return betBalance;
     }
 
-    public void setBetBalance(int betBalance) {
+    /**
+     * update bet balance value
+     * @param betBalance new bet balance value
+     */
+    public void setBetBalance(int betBalance)
+    {
         this.betBalance = betBalance;
     }
 
-    public int getScore() {
+    /**
+     * get score
+     * @return rate of player's hand
+     */
+    public int getScore()
+    {
         return score;
     }
 
-    public boolean isActive() {
+    /**
+     * get status of player
+     * @return status of player
+     */
+    public boolean isActive()
+    {
         return active;
     }
 
-    public void setActive(boolean active) {
+    /**
+     * set status of player
+     * @param active new status
+     */
+    public void setActive(boolean active)
+    {
         this.active = active;
     }
 
-    public Point getPosition() {
+    /**
+     * get position of seat
+     * @return seat's position
+     */
+    public Point getPosition()
+    {
         return position;
     }
 
-    public CardOnHand getCardOnHand() {
+    /**
+     * get belonging cards
+     * @return cards own by this player
+     */
+    public CardOnHand getCardOnHand()
+    {
         return cardOnHand;
     }
 
+    /**
+     * get spedific card in the collection
+     * @param which  index of card
+     * @return requested card
+     */
     public Card getCard(int which)
     {
         return cardOnHand.getCard(which);
     }
 
-    public void addCardOnHand(Card card) {
-        cardOnHand.addCard(card, position, true);
+    /**
+     * add new card to player
+     * @param card  new card
+     */
+    public void addCardOnHand(Card card)
+    {
+        cardOnHand.addCard(card);
     }
 
-    // bettingTurn of actual player will be determined in Game class
-    public String bettingTurn(List<String> availableOption) {
-        return null;
-    }
-
-    public void setNameTagInactive() {
+    /**
+     * Change style of name tag when status of player is inactive
+     */
+    public void setNameTagInactive()
+    {
         this.nameTag.setStyle("-fx-background-color: #373737;");
     }
 
+    /**
+     * update value in betTag
+     * @param display string to be displayed
+     */
     public void setBetTag(String display)
     {
         this.betTag.setText(display);
     }
 
+    /**
+     * get object of betTag
+     * @return object of betTag
+     */
     public Label getBetTag()
     {
         return this.betTag;
     }
 
-    public Label getAmountTag() {
+    /**
+     * get object of amountTag
+     * @return object of amountTag
+     */
+    public Label getAmountTag()
+    {
         return amountTag;
     }
 
-    public void setBalanceLabel() {
+    /**
+     * update balance label
+     */
+    public void setBalanceLabel()
+    {
         this.balanceLabel.setText(Integer.toString(balance));
-        System.out.println("SET BALANCE LABEL for " + name + " TO: " + balance);
     }
 
+    /**
+     * add GUI of this card, so we can refer to if need to remove
+     * @param img GUI of card
+     */
     public void addImgCards(HBox img)
     {
         imgCards.add(img);
     }
 
-    public ArrayList<HBox> getImgCards() {
+    /**
+     * get GUI cards
+     * @return
+     */
+    public ArrayList<HBox> getImgCards()
+    {
         return imgCards;
     }
 
+    /**
+     * remove GUI card for specific card
+     * @param card GUI card to be removed
+     */
     public void removeImgCards(HBox card)
     {
         this.imgCards.remove(card);
     }
 
-    // drawingTurn of actual player will be determined in Game class
+
+    /**
+     * Betting turn of actual player will be determined in Game class
+     * @param availableOption  selectable option
+     * @return selected option
+     */
+    public String bettingTurn(List<String> availableOption)
+    {
+        return null;
+    }
+
+    /**
+     * Drawing turn for actual player will be determined in Game class
+     * which is hosting our GUI
+     * @return list of GUI of card that must be remove
+     */
     public ArrayList<HBox> drawingTurn()
     {
         return null;
     }
 
+
+    /**
+     * Compare player to sort seat position
+     * @param compare instance of player to be compared
+     * @return sorted value
+     */
     @Override
-    public int compareTo(Player comparestu) {
-        int compareage=((Player)comparestu).getSeat();
+    public int compareTo(Player compare)
+    {
+        int tempCompare = ((Player)compare).getSeat();
 
         /* For Ascending order*/
-        return this.seat-compareage;
-
-        /* For Descending order do like this */
-        //return compareage-this.studentage;
+        return this.seat-tempCompare;
     }
+
     /**
      *  Add check pattern 200 line ggez
      */

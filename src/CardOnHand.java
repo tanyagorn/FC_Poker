@@ -1,43 +1,75 @@
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-
-public class CardOnHand {
+/**
+ * CardOnHand represent collection of cards which
+ * belonged to the player
+ *
+ * Created by TC group, 6 December 2017
+ */
+public class CardOnHand
+{
+    /** all belonging cards */
     protected ArrayList<Card> cards = new ArrayList<Card>();
 
-    public void addCard(Card card, Point position, boolean visibility) {
+    /**
+     * add card to collection
+     * @param card  card to be added
+     */
+    public void addCard(Card card)
+    {
         cards.add(card);
     }
 
-    public void removeCard(Card card) {
+    /**
+     * remove card from collection
+     * @param card  card to be removed
+     */
+    public void removeCard(Card card)
+    {
         cards.remove(card);
     }
 
-    public void printAll() {
-        for (Card card : cards) {
-            System.out.println(card.toString());
-        }
-    }
-
-    public Card getCard(int index) {
+    /**
+     * get object of card from specified index
+     * @param index    index of requested card
+     * @return requested card
+     */
+    public Card getCard(int index)
+    {
         return cards.get(index);
     }
 
-    public ArrayList<Card> getCards() {
+    /**
+     * get all belonging cards in collection
+     * @return collection of cards
+     */
+    public ArrayList<Card> getCards()
+    {
         return cards;
     }
+
+    /**
+     * sort card by order
+     */
     public void sortCard()
     {
-        Collections.sort(this.cards, new Comparator<Card>(){
+        Collections.sort(this.cards, new Comparator<Card>()
+        {
             public int compare(Card c1, Card c2)
             {
                 return c2.getCardOrder() - c1.getCardOrder();
             }
         });
     }
-    public int getorder(int card)
+
+    /**
+     * get order of requested card
+     * @param card   index of requested card
+     * @return order of card
+     */
+    public int getOrder(int card)
     {
         return cards.get(card).getCardOrder();
     }

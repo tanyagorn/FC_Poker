@@ -1,4 +1,3 @@
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -11,32 +10,51 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Bot extends Player {
-
-    public Bot(String name, int seat, Point position, int balance, boolean active) {
+/**
+ * Bot class extends from Player class to implement
+ * it own bettingTurn and drawingTurn algorithm
+ *
+ * Created by TC group, 6 December 2017
+ */
+public class Bot extends Player
+{
+    /**
+     * Constructor to create instance of player
+     * @param name      string of name
+     * @param seat      seat number
+     * @param position  position of seat number
+     * @param balance   intial balance
+     * @param active    status of player
+     */
+    public Bot(String name, int seat, Point position, int balance, boolean active)
+    {
+        // Set initial value
         this.name = name;
         this.seat = seat;
         this.position = position;
         this.balance = balance;
         this.active = active;
 
+        // Load .fxml file to create GUI represents this player
         VBox vBox = new VBox();
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Player.fxml"));
         fxmlLoader.setRoot(vBox);
         fxmlLoader.setController(this);
 
-        try {
+        try
+        {
             fxmlLoader.load();
-        } catch (IOException exception) {
+        }
+        catch (IOException exception)
+        {
             throw new RuntimeException(exception);
         }
 
         Game.getPane().getChildren().add(vBox);
-
         vBox.setLayoutX(position.getX() - (180/2));
         vBox.setLayoutY(position.getY());
 
+        // Set GUI component's value
         nameLabel.setText(name);
         balanceLabel.setText(Integer.toString(balance));
         betTag = new Label();
@@ -48,31 +66,26 @@ public class Bot extends Player {
         Game.getPane().getChildren().addAll(betTag, amountTag);
     }
 
+    /**
+     * bettingTurn only decide for which action this bot should take
+     * but the amount of money will be specified by Game class
+     *
+     * @param availableOption  selectable option
+     * @return string of action taken
+     */
     @Override
-    public void addCardOnHand(Card card) {
-        cardOnHand.addCard(card, position, false);
-    }
+    public String bettingTurn(List<String> availableOption)
+    {
+        // update score first
+        patternOnhand();
 
-
-    // bettingTurn only decide for which action this bot should take
-    // but the amount of money will be specified by Game class
-    // return string of action
-    // TODO: calculating percent of winning then making a decision
-    @Override
-    public String bettingTurn(List<String> availableOption) {
-        patternOnhand();        // update score first
-
-        System.out.println("====================================================");
-        System.out.println(availableOption);
-        System.out.println(name + " has score = " + score);
-        System.out.println("====================================================");
-
-        String retString = "";
         Random rn = new Random();
-        int randomNum =  rn.nextInt(2);  // random between 0 and 1
-        if (score > 0) {
+
+        // random between 0 and 1, be an index of return string
+        int randomNum =  rn.nextInt(2);
+        if (score > 0)
+        {
             // Decide to choose between two options
-            randomNum = rn.nextInt(2) + 1;
             if (availableOption.contains("check") && (availableOption.contains("bet")))
             {
                 randomNum = rn.nextInt(11) + 1;     // random between 1 and 10
@@ -103,23 +116,27 @@ public class Bot extends Player {
         return availableOption.get(randomNum);
     }
 
+    /**
+     * Decide to remove which card in player's hand
+     *
+     * @return list of GUI components which will be discarded
+     */
     @Override
-    public ArrayList<HBox> drawingTurn() {
+    public ArrayList<HBox> drawingTurn()
+    {
         ArrayList<HBox> selectedCards = new ArrayList<>();
         ArrayList<Card> rmvcard = new ArrayList<Card>();
         int i = 0;
-        if(score == 0)//Mean has nothing
+        if (score == 0)                  // has nothing
         {
-            for( i = 1;i<5;i++) {
+            for (i = 1; i < 5; i++)
+            {
                 rmvcard.add(cardOnHand.getCard(i));
-                System.out.println("+-+-+-+-+-+--+--+--++-+--+---++-+--+-+--+-+--+--+--+--+-");
-                System.out.println("Remove card : "+cardOnHand.getCard(i));
-                System.out.println("+-+-+-+-+-+--+--+--++-+--+---++-+--+-+--+-+--+--+--+--+-");
             }
         }
-        if(score == 1 || score == 3)//Mean pair or 3 of kind
+        if (score == 1 || score == 3)    // pair or 3 of kind
         {
-            for(i = 0;i<5;i++)
+            for (i = 0; i < 5; i++)
             {
                 if(cardOnHand.getCard(i).getCardOrder() != pair)
                 {
@@ -127,9 +144,9 @@ public class Bot extends Player {
                 }
             }
         }
-        if(score == 2)//mean two pair
+        if (score == 2)                 //two pairs
         {
-            for(i = 0;i<5;i++)
+            for (i = 0; i < 5; i++)
             {
                 if(cardOnHand.getCard(i).getCardOrder() != pair1 ||cardOnHand.getCard(i).getCardOrder() != pair2 )
                 {
@@ -138,6 +155,7 @@ public class Bot extends Player {
             }
         }
 
+        // set return value
         String matchCardID = "";
         for (Card card : rmvcard)
         {

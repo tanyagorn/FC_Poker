@@ -1,15 +1,17 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
-import java.util.TreeSet;
 
-public class Deck {
-
-    /** Instance of TileManager */
+/**
+ *   Singleton of Deck, holding 52 cards to be used in poker game
+ *
+ *   Created by TC group, 6 December 2017
+ */
+public class Deck
+{
+    /** Instance of Deck */
     private static Deck instance = null;
 
-    /** Initial a hundred tiles for Scrabble game */
+    /** 52 cards within the deck */
     private ArrayList<Card> cards = new ArrayList<Card>();
 
     /**
@@ -89,6 +91,9 @@ public class Deck {
         return instance;
     }
 
+    /**
+     *  Re-initialize deck of card
+     */
     public void reInitDeck()
     {
         cards.clear();
@@ -149,14 +154,23 @@ public class Deck {
         cards.add(new Card("A", "spades",13));
     }
 
-    public void removeCard(Card card) {
+    /**
+     * remove card from deck
+     * @param  card which card
+     */
+    public void removeCard(Card card)
+    {
         cards.remove(card);
     }
 
-    // Automatically remove that card from Deck
-    public Card getRandomCard() {
+    /**
+     * random card for user, then automatically remove that card from Deck
+     * @return random card from deck
+     */
+    public Card getRandomCard()
+    {
         Random rand = new Random();
-        int random = rand.nextInt((cards.size()-1) + 1);
+        int random = rand.nextInt((cards.size()-1));
         Card randomCard = cards.get(random);
         removeCard(randomCard);
         return randomCard;

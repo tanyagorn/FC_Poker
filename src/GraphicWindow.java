@@ -11,18 +11,27 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class GraphicWindow extends Application {
-    private static Game game;
+/**
+ *   Include main() to execute program, launch GUI
+ *   then get information to initialize poker game.
+ *
+ *   Created by TC group, 6 December 2017
+ */
+public class GraphicWindow extends Application
+{
+    /** Container for GUI components */
     private static Pane pane;
+
+    /** Top-level container that hosts a Scene */
     private static Stage stage;
+
+    /** Holding position for each seat point */
     private static HashMap<Integer, Point> seatPosition = new HashMap<Integer, Point>();
 
-    private static HashMap<Integer, ArrayList<String>> test = new HashMap<Integer, ArrayList<String>>();
-
+    /** GUI components loading from .FXML file */
     @FXML private TextField name;
     @FXML private ComboBox<String> playerCount;
     @FXML private Button nextButton;
@@ -30,31 +39,39 @@ public class GraphicWindow extends Application {
     @FXML private VBox firstScene;
     @FXML private VBox secondScene;
 
+    /**
+     *  Launch JavaFX application
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) throws Exception
+    {
         //can now use the stage in other methods
         stage = primaryStage;
 
         pane = new Pane();
         Scene scene = new Scene(pane, 1000, 800);
 
+        // Load .fxml file to get GUI components
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Main.fxml"));
         fxmlLoader.setRoot(pane);
         fxmlLoader.setController(this);
 
-        try {
+        try
+        {
             fxmlLoader.load();
-        } catch (IOException exception) {
+        } catch (IOException exception)
+        {
             throw new RuntimeException(exception);
         }
 
-        /* Keep the position of each seat in HashMap */
+        // Keep the position of each seat in HashMap
         seatPosition.put(1, new Point(795,230));
         seatPosition.put(2, new Point(795,520));
         seatPosition.put(3, new Point(500,580));
         seatPosition.put(4, new Point(210,520));
         seatPosition.put(5, new Point(210,230));
 
+        // Set initial value
         name.setText("Dummy");
         // populate the combo box with number of player choices.
         playerCount.getItems().setAll("2","3","4","5");
@@ -65,19 +82,24 @@ public class GraphicWindow extends Application {
 
         // hide button in the first scene
         // also adding event handler for each button
-        for (int i = 0; i < seatButton.size(); i++) {
+        for (int i = 0; i < seatButton.size(); i++)
+        {
             seatButton.get(i).setVisible(false);
             int seat = i+1;
-            seatButton.get(i).setOnAction(event -> {
-                game = new Game(name.getText(), Integer.parseInt(playerCount.getValue()),
+            seatButton.get(i).setOnAction(event ->
+            {
+                new Game(name.getText(), Integer.parseInt(playerCount.getValue()),
                         seat, seatPosition.get(seat).getLocation());
             });
         }
 
-        nextButton.setOnAction(event -> {
+        // when NEXT is clicked, display scene with option for selecting seat
+        nextButton.setOnAction(event ->
+        {
             firstScene.setVisible(false);
             secondScene.setVisible(true);
-            for (int i = 0; i < seatButton.size(); i++) {
+            for (int i = 0; i < seatButton.size(); i++)
+            {
                 seatButton.get(i).setVisible(true);
             }
         });
@@ -88,18 +110,30 @@ public class GraphicWindow extends Application {
         primaryStage.show();
     }
 
-    public static Stage getStage() {
+    /**
+     * return stage to host another scene
+     * @return top-level container
+     */
+    public static Stage getStage()
+    {
         return stage;
     }
 
-    // return clone version of seatPosition
-    public static Point getSeatPosition(Integer seat) {
+    /**
+     * return point of seat position
+     * @param  seat which seat
+     * @return seat position
+     */
+    public static Point getSeatPosition(Integer seat)
+    {
         return seatPosition.get(seat);
     }
 
-
-
-    public static void main(String[] args) {
+    /**
+     * main method which launch javafx application
+     */
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }

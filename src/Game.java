@@ -1,7 +1,6 @@
 import javafx.animation.PathTransition;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -30,19 +29,26 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-
+/**
+ *   Game class controls game flow, handle events, responsible
+ *   to assign turn to the players.
+ *
+ *   Created by TC group, 6 December 2017
+ */
 public class Game {
+    /** Instance of pool to be give to the winner at the end of game */
     private Pool pool;
+
+    /** Holding all player instances */
     private static ArrayList<Player> players = new ArrayList<Player>();
-    private ArrayList<Player> activePlayers = new ArrayList<Player>();
+
+    /** Holding list of winner players */
     private static ArrayList<Player> winners = new ArrayList<Player>();
-    private String playerName;
-    private int playerCount;
+
     private static Pane pane;
 
     private String state;
     private int subState;            // subState reference to index in players [0,1,2,3,4]
-    private static final double CARD_POSITION = 20;
 
     private List<Integer> availableSeat = new ArrayList<>(Arrays.asList(1,2,3,4,5));
     private List<String> availableOption = new ArrayList<>(Arrays.asList("fold","check","bet","call","raise"));
@@ -54,11 +60,10 @@ public class Game {
     private boolean round;
     private ArrayList<HBox> selectedCard = new ArrayList<HBox>();   // keep selected card
     ArrayList<Node> nodes = new ArrayList<Node>();
-    private Label poolLabel;
     private boolean drawOver;
     private Player winner;
     private int highestBetBalance;
-    private int previousBet;
+    private Label poolLabel;
 
     @FXML private Label roundLabel;
     @FXML private Button fold;
@@ -71,23 +76,26 @@ public class Game {
     @FXML private Button redrawBtn;
     @FXML private Button endTurnBtn;
 
-    public Game(String playerName, int playerCount, int seat, Point location) {
-        this.playerName = playerName;
-        this.playerCount = playerCount;
-
+    public Game(String playerName, int playerCount, int seat, Point location)
+    {
         pane = new Pane();
         Scene scene = new Scene(pane, 1000, 800);
 
+        // Load .fxml file to set scene
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Game2.fxml"));
         fxmlLoader.setRoot(pane);
         fxmlLoader.setController(this);
 
-        try {
+        try
+        {
             fxmlLoader.load();
-        } catch (IOException exception) {
+        }
+        catch (IOException exception)
+        {
             throw new RuntimeException(exception);
         }
 
+        // Add default value for information needed to draw object
         bettingTagPosition.put(1, new Point(690, 310));
         bettingTagPosition.put(2, new Point(660, 410));
         bettingTagPosition.put(3, new Point(490, 440));
@@ -100,15 +108,12 @@ public class Game {
         bettingAmountPosition.put(4, new Point(310, 380));
         bettingAmountPosition.put(5, new Point(350, 280));
 
-        // Will be visible when it is a time for betting round
-        roundLabel.setVisible(false);
-        selectedCard.clear();
-        drawOver = false;
-
         // Binding slider to textField, with specified format by converter
-        StringConverter<Number> converter = new StringConverter<Number>() {
+        StringConverter<Number> converter = new StringConverter<Number>()
+        {
             @Override
-            public String toString(Number object) {
+            public String toString(Number object)
+            {
                 if (object != null)
                     return Integer.toString((int) Math.round(slider.valueProperty().doubleValue()));
                 else
@@ -116,21 +121,17 @@ public class Game {
             }
 
             @Override
-            public Double fromString(String string) {
+            public Double fromString(String string)
+            {
                 Double d = Double.parseDouble(string);
                 inputText.textProperty().setValue(Integer.toString((int) Math.round(d)));
                 return d;
             }
         };
+        // binding value of input text for amount of money to slider
         inputText.textProperty().bindBidirectional(slider.valueProperty(), converter);
 
         GraphicWindow.getStage().setScene(scene);
-
-        pool = new Pool();
-        poolLabel = new Label("");
-        poolLabel.setLayoutX(490);
-        poolLabel.setLayoutY(350);
-        pane.getChildren().add(poolLabel);
 
         // create instance of player at the selected position first
         Player player = new Player(playerName, seat, location, 500, true);
@@ -139,7 +140,8 @@ public class Game {
         availableSeat.remove((Object)seat);
 
         // create other bots
-        for (int i = 0; i < playerCount-1; i++) {
+        for (int i = 0; i < playerCount-1; i++)
+        {
             int pos = randomSeat();
             String name = "Player" + (i+1);
             Bot bot = new Bot(name, pos, GraphicWindow.getSeatPosition(pos), 500, true);
@@ -154,9 +156,19 @@ public class Game {
         // Set initial state
         state = "deal";
         subState = 0;
+        roundLabel.setVisible(false);
+        selectedCard.clear();
+        drawOver = false;
         controlButton(true);
 
-        // Add action listener to every button
+        // Initialize pool
+        pool = new Pool();
+        poolLabel = new Label("");
+        poolLabel.setLayoutX(490);
+        poolLabel.setLayoutY(350);
+        pane.getChildren().add(poolLabel);
+
+        // Add action listener to every button to capture actual player event
         check.setOnAction((ActionEvent e) -> {
             // every player already take a turn - end this betting round
             // start drawing phase
@@ -168,18 +180,21 @@ public class Game {
                 state = "check";
             }
         });
-        call.setOnAction((ActionEvent e) -> {
+        call.setOnAction((ActionEvent e) ->
+        {
             int previousBetBalance = player.getBetBalance();
             player.setBetBalance(highestBetBalance);
             additionalAmount = player.getBetBalance() - previousBetBalance;
             player.setBalance(player.getBalance() - additionalAmount);
             state = "call";
         });
-        fold.setOnAction((ActionEvent e) -> {
+        fold.setOnAction((ActionEvent e) ->
+        {
             player.setActive(false);
             state = "fold";
         });
-        raise.setOnAction((ActionEvent e) -> {
+        raise.setOnAction((ActionEvent e) ->
+        {
             int previousBetBalance = player.getBetBalance();
             if (getHighestBetBalance() + Integer.parseInt(inputText.getText()) > player.getBalance())
             {
@@ -194,22 +209,18 @@ public class Game {
             }
             state = "raise";
         });
-        bet.setOnAction((ActionEvent e) -> {
+        bet.setOnAction((ActionEvent e) ->
+        {
             player.setBetBalance(Integer.parseInt(inputText.getText()));
             player.setBalance(player.getBalance() - player.getBetBalance());
             state = "bet";
         });
-        redrawBtn.setOnAction((ActionEvent e) -> {
-            System.out.println("==================REMOVE==================");
-            System.out.println("==================REMOVE==================");
-            System.out.println("==================REMOVE==================");
-            System.out.println("MUST REMOVE " + selectedCard);
-
+        redrawBtn.setOnAction((ActionEvent e) ->
+        {
             // remove GUI component
             for (HBox selected : selectedCard)
-            {
                 player.removeImgCards(selected);
-            }
+
 
             // remove card for this player
             String matchCard = null;
@@ -220,31 +231,25 @@ public class Game {
                 for (HBox selected : selectedCard)
                 {
                     if (matchCard.equals(selected.getId()))
-                    {
                         player.getCardOnHand().removeCard(cards.get(i));
-                    }
                 }
             }
-
             // draw new card - update data in model
             Card randCard = Deck.getInstance().getRandomCard();
             player.addCardOnHand(randCard);
-
-            System.out.println(player.getImgCards());
-            System.out.println(player.getCardOnHand().getCards());
             state = "discardCard";
         });
-        endTurnBtn.setOnAction((ActionEvent e) -> {
-            System.out.println("==================END TURN==================");
-            System.out.println("==================END TURN==================");
-            System.out.println("==================END TURN==================");
+        endTurnBtn.setOnAction((ActionEvent e) ->
+        {
             player.cardOnHand.sortCard();
             state = "newDraw";
         });
 
-        new Thread(new Runnable() {
+        new Thread(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 update();
             }
         }).start();
@@ -495,8 +500,6 @@ public class Game {
             // then back to betting like others
             case "fold":
                 foldUI(players.get(subState));
-//                slider.setMin(0);
-//                slider.setMax(getLimitBet());
                 state = "delayFold";
                 break;
 
@@ -920,27 +923,25 @@ public class Game {
 
         // Find position by calculating from number of element in cards
         double x = 0;
-        if (i == 0) {
+        if (i == 0)
             x = player.getPosition().getX() - 40;
-        } else if (i == 1) {
+        else if (i == 1)
             x = player.getPosition().getX() - 20;
-        } else if (i == 2) {
+        else if (i == 2)
             x = player.getPosition().getX();
-        } else if (i == 3) {
+        else if (i == 3)
             x = player.getPosition().getX() + 20;
-        } else if (i == 4) {
+        else if (i == 4)
             x = player.getPosition().getX() + 40;
-        }
 
         // Play animation here
         Path path = new Path();
-        path.getElements().add(new MoveTo(466,140));
-        path.getElements().add(new LineTo(x, player.getPosition().getY() - (bottom.getImage().getHeight()/2)));
+        path.getElements().add(new MoveTo(466, 140));
+        path.getElements().add(new LineTo(x, player.getPosition().getY() - (bottom.getImage().getHeight() / 2)));
         PathTransition pathTransition = new PathTransition();
         pathTransition.setPath(path);
         pathTransition.setNode(layout);
         pathTransition.play();
-
         pane.getChildren().add(layout);
     }
 
@@ -961,7 +962,8 @@ public class Game {
         Deck.getInstance().reInitDeck();
         // Each player getting five cards
         for (int i = 0; i < 5; i++) {
-            for (Player player : players) {
+            for (Player player : players)
+            {
                 Card randCard = Deck.getInstance().getRandomCard();
                 player.addCardOnHand(randCard);
             }
@@ -970,13 +972,6 @@ public class Game {
         for (Player player : players)
         {
             player.getCardOnHand().sortCard();
-        }
-
-        // debugging loop
-        for (Player p : players) {
-            System.out.println(p.getName());
-            p.cardOnHand.printAll();
-            System.out.println("==========================");
         }
     }
 
@@ -1202,17 +1197,20 @@ public class Game {
         int numberOfActivePlayer = 0;
         for (Player player : players)
         {
-            if (player.isActive()) {
+            if (player.isActive())
+            {
                 numberOfActivePlayer++;
                 winner = player;
             }
         }
 
-        if (numberOfActivePlayer > 1) {
+        if (numberOfActivePlayer > 1)
+        {
             winner = null;
             return false;
         }
-        else {
+        else
+        {
             return true;
         }
     }
@@ -1262,7 +1260,8 @@ public class Game {
         return availableSeat.get(random);
     }
 
-    public static Pane getPane() {
+    public static Pane getPane()
+    {
         return pane;
     }
 
@@ -1275,7 +1274,6 @@ public class Game {
     {
         return bettingAmountPosition.get(player.getSeat());
     }
-
 
     // Return min bet
     private int getLimitBet()

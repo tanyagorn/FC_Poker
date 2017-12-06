@@ -53,14 +53,14 @@ public class WinnerFinder
             int Startcard = -1;
             for (int i = 0; i < winners.size(); i++)
             {
-                if (winners.get(i).cardOnHand.getorder(0) > Startcard)
+                if (winners.get(i).cardOnHand.getOrder(0) > Startcard)
                 {
-                    Startcard = winners.get(i).cardOnHand.getorder(0);
+                    Startcard = winners.get(i).cardOnHand.getOrder(0);
                 }
             }
             for (int i = winners.size() - 1; i >= 0; i--)
             {
-                if (winners.get(i).cardOnHand.getorder(0) < Startcard)
+                if (winners.get(i).cardOnHand.getOrder(0) < Startcard)
                 {
                     winners.remove(i);
                 }
@@ -71,14 +71,14 @@ public class WinnerFinder
             int Startcard = -1;
             for (int i = 0; i < winners.size(); i++)
             {
-                if (winners.get(i).cardOnHand.getorder(1) > Startcard)
+                if (winners.get(i).cardOnHand.getOrder(1) > Startcard)
                 {
-                    Startcard = winners.get(i).cardOnHand.getorder(1);
+                    Startcard = winners.get(i).cardOnHand.getOrder(1);
                 }
             }
             for (int i = winners.size() - 1; i >= 0; i--)
             {
-                if (winners.get(i).cardOnHand.getorder(1) < Startcard)
+                if (winners.get(i).cardOnHand.getOrder(1) < Startcard)
                 {
                     winners.remove(i);
                 }
@@ -89,14 +89,14 @@ public class WinnerFinder
             int Startcard = 0;
             for (int i = 0; i < winners.size(); i++)
             {
-                if (winners.get(i).cardOnHand.getorder(2) > Startcard)
+                if (winners.get(i).cardOnHand.getOrder(2) > Startcard)
                 {
-                    Startcard = winners.get(i).cardOnHand.getorder(2);
+                    Startcard = winners.get(i).cardOnHand.getOrder(2);
                 }
             }
             for (int i = winners.size() - 1; i >= 0; i--)
             {
-                if (winners.get(i).cardOnHand.getorder(2) < Startcard)
+                if (winners.get(i).cardOnHand.getOrder(2) < Startcard)
                 {
                     winners.remove(i);
                 }
@@ -110,14 +110,14 @@ public class WinnerFinder
                 int card = -1;
                 for (int j = winners.size() - 1; j >= 0; j--)
                 {
-                    if (winners.get(j).cardOnHand.getorder(i) > card)
+                    if (winners.get(j).cardOnHand.getOrder(i) > card)
                     {
-                        card = winners.get(j).cardOnHand.getorder(i);
+                        card = winners.get(j).cardOnHand.getOrder(i);
                     }
                 }
                 for (int j = winners.size() - 1; j >= 0; j--)
                 {
-                    if (winners.get(j).cardOnHand.getorder(i) < card)
+                    if (winners.get(j).cardOnHand.getOrder(i) < card)
                     {
                         winners.remove(j);
                     }
@@ -164,9 +164,9 @@ public class WinnerFinder
                     for (int i = 0; i < 5; i++)
                     {
                         for (Player winner : winners) {
-                            if (winner.cardOnHand.getorder(i) != firstpair && winner.cardOnHand.getorder(i) != secondpair) {
-                                if (winner.cardOnHand.getorder(i) > lastcard) {
-                                    lastcard = winner.cardOnHand.getorder(i);
+                            if (winner.cardOnHand.getOrder(i) != firstpair && winner.cardOnHand.getOrder(i) != secondpair) {
+                                if (winner.cardOnHand.getOrder(i) > lastcard) {
+                                    lastcard = winner.cardOnHand.getOrder(i);
                                 }
                             }
                         }
@@ -175,9 +175,9 @@ public class WinnerFinder
                     {
                         for (int j = winners.size() - 1; j >= 0; j--)
                         {
-                            if (winners.get(j).cardOnHand.getorder(i) != firstpair && winners.get(j).cardOnHand.getorder(i) != secondpair)
+                            if (winners.get(j).cardOnHand.getOrder(i) != firstpair && winners.get(j).cardOnHand.getOrder(i) != secondpair)
                             {
-                                if (winners.get(j).cardOnHand.getorder(i) < lastcard)
+                                if (winners.get(j).cardOnHand.getOrder(i) < lastcard)
                                 {
                                     winners.remove(j);
                                 }
@@ -212,19 +212,19 @@ public class WinnerFinder
                     int lastcard = -1;
                     for (int j = winners.size() - 1; j >= 0; j--)
                     {
-                        if (winners.get(j).cardOnHand.getorder(i) != pair)
+                        if (winners.get(j).cardOnHand.getOrder(i) != pair)
                         {
-                            if (winners.get(j).cardOnHand.getorder(i) > lastcard)
+                            if (winners.get(j).cardOnHand.getOrder(i) > lastcard)
                             {
-                                lastcard = winners.get(j).cardOnHand.getorder(i);
+                                lastcard = winners.get(j).cardOnHand.getOrder(i);
                             }
                         }
                     }
                     for (int j = winners.size() - 1; j >= 0; j--)
                     {
-                        if (winners.get(j).cardOnHand.getorder(i) != pair)
+                        if (winners.get(j).cardOnHand.getOrder(i) != pair)
                         {
-                            if (winners.get(j).cardOnHand.getorder(i) < lastcard)
+                            if (winners.get(j).cardOnHand.getOrder(i) < lastcard)
                             {
                                 winners.remove(j);
                             }

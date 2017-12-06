@@ -1,40 +1,76 @@
-import java.awt.*;
-
-public class Card implements Comparable<Card>{
+/**
+ * Card represent one of 52 cards in the deck
+ *
+ * Created by TC group, 6 December 2017
+ */
+public class Card implements Comparable<Card>
+{
+    /** Letter or number of card ex. A,K,Q,J,10,9 */
     private String cardLetter;
-    private String cardType;
-    private int cardOrder = 0;
-    private Point position;
 
-    public Card(String cardLetter, String cardType,int cardOrder) {
+    /** Type of card ex. clubs, hearts */
+    private String cardType;
+
+    /** order of card to calculate for winning chance */
+    private int cardOrder = 0;
+
+    /**
+     * Constructor to create instance of card
+     * @param cardLetter   string of letter or number
+     * @param cardType     type of card
+     * @param cardOrder    order of card
+     */
+    public Card(String cardLetter, String cardType, int cardOrder)
+    {
         this.cardLetter = cardLetter;
         this.cardType = cardType;
         this.cardOrder = cardOrder;
     }
 
-    public String getCardLetter() {
+    /**
+     * get card letter
+     * @return card letter
+     */
+    public String getCardLetter()
+    {
         return cardLetter;
     }
 
-    public String getCardType() {
+    /**
+     * get card type
+     * @return card type
+     */
+    public String getCardType()
+    {
         return cardType;
     }
 
-    public int getCardOrder(){return cardOrder; }
-    public Point getPosition() {
-        return position;
+    /**
+     * get card order
+     * @return card order
+     */
+    public int getCardOrder()
+    {
+        return cardOrder;
     }
 
-    public void setPosition(Point position) {
-        this.position = position;
-    }
-
+    /**
+     * get readable string from card object
+     * @return formatted string
+     */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Letter " + cardLetter + " : Type " + cardType;
     }
 
-    public int compareTo(Card c) {
+    /**
+     * sort card
+     * @param card  card to be compared
+     * @return always zero
+     */
+    public int compareTo(Card card)
+    {
         return 0;
     }
 }
