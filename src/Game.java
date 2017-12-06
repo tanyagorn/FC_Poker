@@ -35,7 +35,8 @@ import java.util.List;
  *
  *   Created by TC group, 6 December 2017
  */
-public class Game {
+public class Game
+{
     /** Instance of pool to be give to the winner at the end of game */
     private Pool pool;
 
@@ -434,7 +435,7 @@ public class Game {
             @Override
             public void run()
             {
-                redraw();
+                updateUI();
                 new Thread(new Runnable()
                 {
                     @Override
@@ -469,7 +470,7 @@ public class Game {
     /**
      * Make UI consistent with game's flow (updateModel)
      */
-    private void redraw()
+    private void updateUI()
     {
         switch (state)
         {
@@ -640,7 +641,6 @@ public class Game {
         }
 
     }
-
 
     /**
      * play animation of discarding card to dealer, add soon to be removed

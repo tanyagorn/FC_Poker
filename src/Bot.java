@@ -77,7 +77,7 @@ public class Bot extends Player
     public String bettingTurn(List<String> availableOption)
     {
         // update score first
-        patternOnhand();
+        patternOnHand();
 
         Random rn = new Random();
 

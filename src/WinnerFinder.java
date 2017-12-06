@@ -31,7 +31,7 @@ public class WinnerFinder
          */
         for (int i = 0; i < players.size(); i++)
         {
-            players.get(i).patternOnhand();
+            players.get(i).patternOnHand();
         }
 
         int maxweight = -1;

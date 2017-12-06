@@ -119,15 +119,6 @@ public class Player implements Comparable<Player>
     }
 
     /**
-     * get player's name
-     * @return name of player
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
      * get seat number
      * @return seat number
      */
@@ -581,7 +572,7 @@ public class Player implements Comparable<Player>
     /**
      * Check pattern of the card on player hand and update score for each player
      */
-    public void patternOnhand()
+    public void patternOnHand()
     {
         int straight = 0;
         int flush = 0;
