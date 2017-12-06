@@ -1,9 +1,20 @@
 import java.util.ArrayList;
 
+/**
+ * WinnerFinder find the player who has the best hand
+ *
+ * Created by TC group, 6 December 2017
+ */
 public class WinnerFinder
 {
+    /** list of winner players */
     private static ArrayList<Player> winners = new ArrayList<Player>();
 
+    /**
+     * find winner players
+     * @param players   currently active players
+     * @return array of winner
+     */
     public static ArrayList<Player> findWinner(ArrayList<Player> players)
     {
         winners.clear();

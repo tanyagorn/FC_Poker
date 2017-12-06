@@ -45,26 +45,47 @@ public class Game {
     /** Holding list of winner players */
     private static ArrayList<Player> winners = new ArrayList<Player>();
 
+    /** Container for GUI components */
     private static Pane pane;
 
+    /** holding current state; critical for game's flow */
     private String state;
-    private int subState;            // subState reference to index in players [0,1,2,3,4]
 
+    /** holding which turn; critical for assigning turn to each player
+     * subState reference to index in players [0,1,2,3,4] */
+    private int subState;
+
+    /** use in randomly find available seat */
     private List<Integer> availableSeat = new ArrayList<>(Arrays.asList(1,2,3,4,5));
+
+    /** list of available options of betting turn */
     private List<String> availableOption = new ArrayList<>(Arrays.asList("fold","check","bet","call","raise"));
+
+    /** holding x,y coordinates of betting tag position */
     private static HashMap<Integer, Point> bettingTagPosition = new HashMap<Integer, Point>();
+
+    /** holding x,y coordinates of betting amount position */
     private static HashMap<Integer, Point> bettingAmountPosition = new HashMap<Integer, Point>();
 
-    private String latestDecision;
+    /** additional amount must be used to update balance for player*/
     private int additionalAmount;
+
+    /** keep track when all player has already take a turn */
     private boolean round;
-    private ArrayList<HBox> selectedCard = new ArrayList<HBox>();   // keep selected card
-    ArrayList<Node> nodes = new ArrayList<Node>();
+
+    /** keep track of drawing round is over or not to end game */
     private boolean drawOver;
-    private Player winner;
-    private int highestBetBalance;
+
+    /** used for display amount of pool value */
     private Label poolLabel;
 
+    /** Keep track which card is selected in drawing turn */
+    private ArrayList<HBox> selectedCard = new ArrayList<HBox>();
+
+    /** Keep track of cards that soon will be removed from pane */
+    ArrayList<Node> nodes = new ArrayList<Node>();
+
+    /** GUI components loading from .FXML file */
     @FXML private Label roundLabel;
     @FXML private Button fold;
     @FXML private Button check;
@@ -76,13 +97,21 @@ public class Game {
     @FXML private Button redrawBtn;
     @FXML private Button endTurnBtn;
 
+    /**
+     * Constructor of game instance, create all player instances
+     * and initialize all value needed to control game's flow
+     * @param playerName        name of actual player
+     * @param playerCount       number of all players
+     * @param seat              seat of actual player
+     * @param location          seat position of actual player
+     */
     public Game(String playerName, int playerCount, int seat, Point location)
     {
         pane = new Pane();
         Scene scene = new Scene(pane, 1000, 800);
 
         // Load .fxml file to set scene
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Game2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Game.fxml"));
         fxmlLoader.setRoot(pane);
         fxmlLoader.setController(this);
 
@@ -153,13 +182,6 @@ public class Game {
         // so that dealer can distribute card in correct order
         Collections.sort(players);
 
-        // Set initial state
-        state = "deal";
-        subState = 0;
-        roundLabel.setVisible(false);
-        selectedCard.clear();
-        drawOver = false;
-        controlButton(true);
 
         // Initialize pool
         pool = new Pool();
@@ -167,6 +189,8 @@ public class Game {
         poolLabel.setLayoutX(490);
         poolLabel.setLayoutY(350);
         pane.getChildren().add(poolLabel);
+
+        setInitialState();
 
         // Add action listener to every button to capture actual player event
         check.setOnAction((ActionEvent e) -> {
@@ -183,7 +207,7 @@ public class Game {
         call.setOnAction((ActionEvent e) ->
         {
             int previousBetBalance = player.getBetBalance();
-            player.setBetBalance(highestBetBalance);
+            player.setBetBalance(getHighestBetBalance());
             additionalAmount = player.getBetBalance() - previousBetBalance;
             player.setBalance(player.getBalance() - additionalAmount);
             state = "call";
@@ -245,23 +269,45 @@ public class Game {
             state = "newDraw";
         });
 
+        // Other thread to handle game's flow
+        // There are two threads - one responsible for
+        // updating UI, one for updating model
         new Thread(new Runnable()
         {
             @Override
             public void run()
             {
-                update();
+                updateModel();
             }
         }).start();
     }
 
-    // Check for terminate condition of betting turn
-    // all active players must have same amount of bet balance
+    /**
+     * re-initialize state for new game
+     */
+    private void setInitialState()
+    {
+        state = "deal";
+        subState = 0;
+        roundLabel.setVisible(false);
+        selectedCard.clear();
+        drawOver = false;
+        round = false;
+        winners.clear();
+        pool.setPool(0);
+        controlButton(true);
+    }
+
+    /**
+     * Check for terminate condition of betting turn
+     * all active players must have same amount of bet balance
+     * @return boolean indicates betting turn is over or not
+     */
     private boolean isBettingOver()
     {
         int betBalance = 0;
 
-        // This loop is for get the initial betBalance to compare with others
+        // This loop is for getting the initial betBalance to compare with others
         for (Player player : players)
         {
             if (player.isActive())
@@ -282,33 +328,39 @@ public class Game {
         return true;
     }
 
-    // Handle game's flow
-    private void update()
+    /**
+     * Handle game's flow and update model data
+     */
+    private void updateModel()
     {
-        // other thread
+        // different state has different behavior
         switch (state)
         {
             case "deal":
-                System.out.println("UPDATE - DEAL");
                 dealCard();
                 break;
+
             case "afterDeal":
                 delayTime(500);
                 break;
+
             case "delayFold":
                 delayTime(500);
                 break;
+
             case "delayDraw":
                 delayTime(500);
-                break;
+
+
             case "delayReturn":
                 delayTime(500);
                 break;
+
             case "delayDisplayCard":
                 delayTime(3000);
                 break;
+
             case "betting":
-                System.out.println("UPDATE - BETTING PHASE : substate = " + subState);
                 if (hasWinner())
                 {
                     System.out.println("WE GOT WINNER");
@@ -333,36 +385,7 @@ public class Game {
                 }
                 break;
 
-            // Pause state is for waiting for player response
-            case "pause":
-                break;
-            case "fold":
-                System.out.println("HAS CHOSE FOLD");
-                break;
-            case "check":
-                System.out.println("HAS CHOSE CHECK");
-                break;
-            case "call":
-                System.out.println("HAS CHOSE CALL");
-                break;
-            case "bet" :
-                System.out.println("HAS CHOSE BET");
-                break;
-            case "raise":
-                System.out.println("HAS CHOSE RAISE");
-                break;
-
-            // TODO: must find winner here
-            case "winner":
-                System.out.println("WE HAVE THE WINNER!!!!");
-                break;
-
-            case "cumulate":
-                System.out.println("UPDATE - CUMULATE PHASE");
-                break;
-
             case "draw":
-                System.out.println("UPDATE - DRAWING PHASE : substate = " + subState);
                 if (hasWinner())
                 {
                     state = "showCard";
@@ -389,50 +412,46 @@ public class Game {
                 }
                 break;
 
-            case "discardCard" :
-                System.out.println("UPDATE - DISCARD PHASE");
-                break;
-
-            case "newDraw":
-                System.out.println("UPDATE - NEW DRAW");
-                break;
-
             case "newGame":
                 // Finish collect all cards, INIT NEW GAME
                 if (subState == players.size())
                 {
-                    subState = 0;
-                    round = false;
-                    drawOver = false;
-                    state = "deal";
-                    winner = null;
-                    pool.setPool(0);
+                    setInitialState();
                     dealCard();
                     for (Player player : players)
                     {
                         player.setActive(true);
                     }
-                    System.out.println("UPDATE - MUST INIT NEW GAME");
                 }
                 break;
-
         }
 
-        Platform.runLater(new Runnable() {
+        // Back to other thread to update UI, must call for this
+        // thread to be used later, so we will always switch
+        // between update model and update UI
+        Platform.runLater(new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
                 redraw();
-                new Thread(new Runnable() {
+                new Thread(new Runnable()
+                {
                     @Override
-                    public void run() {
-                        update();
+                    public void run()
+                    {
+                        updateModel();
                     }
                 }).start();
             }
         });
     }
 
-    // Get highest bet balance for all player that still active in the game
+    /**
+     * Get highest bet balance for all player that still active in the game
+     * used to determine bet value
+     * @return highest bet balance of current active player
+     */
     private int getHighestBetBalance()
     {
         int highestBetBalance = 0;
@@ -447,7 +466,9 @@ public class Game {
         return highestBetBalance;
     }
 
-    // UI
+    /**
+     * Make UI consistent with game's flow (updateModel)
+     */
     private void redraw()
     {
         switch (state)
@@ -521,7 +542,7 @@ public class Game {
                 subState++;
                 System.out.println("CHECK : subState is added to " + subState);
                 slider.setMin(0);
-                slider.setMax(getLimitBet());
+                slider.setMax(getLowestBalance());
                 break;
 
             // UpdateBalanceUI, also maybe display call
@@ -531,7 +552,7 @@ public class Game {
                 subState++;
                 System.out.println("CALL : subState is added to " + subState);
                 slider.setMin(0);
-                slider.setMax(getLimitBet());
+                slider.setMax(getLowestBalance());
                 break;
 
             case "bet" :
@@ -540,7 +561,7 @@ public class Game {
                 subState++;
                 System.out.println("BET : subState is added to " + subState);
                 slider.setMin(0);
-                slider.setMax(getLimitBet());
+                slider.setMax(getLowestBalance());
                 break;
 
             case "raise" :
@@ -549,7 +570,7 @@ public class Game {
                 subState++;
                 System.out.println("RAISE : subState is added to " + subState);
                 slider.setMin(0);
-                slider.setMax(getLimitBet());
+                slider.setMax(getLowestBalance());
                 break;
 
             case "cumulate" :
@@ -590,7 +611,7 @@ public class Game {
                 break;
 
             case "newDraw" :
-                updateCardOnHand(players.get(subState));
+                updateCardOnHandUI(players.get(subState));
                 for (int i = 0; i < 5; i++)
                 {
                     dealCardUI(players.get(subState), i);
@@ -611,6 +632,8 @@ public class Game {
                     node.setVisible(false);
                 }
                 poolLabel.setText("0");
+                poolLabel.setTranslateX(0);
+                poolLabel.setTranslateY(0);
                 state = "newGame";
                 subState++;
                 break;
@@ -618,7 +641,54 @@ public class Game {
 
     }
 
-    // Call all cards back to dealer, remove data of cards for this player
+
+    /**
+     * play animation of discarding card to dealer, add soon to be removed
+     * card to nodes array, so we can remove them later without knowing who
+     * is the owner (we can get node position instead of player position)
+     * @param player  owner of card
+     */
+    private void foldUI(Player player)
+    {
+        ArrayList<HBox> cards = player.getImgCards();
+        for (int i = cards.size()-1; i > -1; i--)
+        {
+            for (Node node : pane.getChildren())
+            {
+                if (node.equals(cards.get(i)))
+                {
+                    cardToDealerAnimation(node);
+                }
+            }
+        }
+
+        // Change style of name tag for this player
+        player.setNameTagInactive();
+    }
+
+    /**
+     * remove all objects of card GUI from the pane
+     * @param player  which player
+     */
+    private void updateCardOnHandUI(Player player)
+    {
+        for (HBox card : player.getImgCards())
+        {
+            for (int i = pane.getChildren().size()-1; i >= 0; i--)
+            {
+                if (pane.getChildren().get(i).equals(card))
+                {
+                    pane.getChildren().remove(pane.getChildren().get(i));
+                }
+            }
+        }
+        player.getImgCards().clear();
+    }
+
+    /**
+     * Call all cards back to dealer, remove data of cards for this player
+     * @param player
+     */
     private void returnCardUI(Player player)
     {
         nodes.clear();
@@ -647,24 +717,11 @@ public class Game {
         player.getCardOnHand().getCards().clear();
     }
 
-    private void updateCardOnHand(Player player)
-    {
-        System.out.println("REDRAW - UPDATE CARD ON HAND");
-        // remove all
-        for (HBox card : player.getImgCards())
-        {
-            for (int i = pane.getChildren().size()-1; i >= 0; i--)
-            {
-                if (pane.getChildren().get(i).equals(card))
-                {
-                    pane.getChildren().remove(pane.getChildren().get(i));
-                }
-            }
-        }
-        player.getImgCards().clear();
-    }
-
-    // discard any card within nodes array, don't need to know who is the owner
+    /**
+     * play animation of discarding card to dealer, add soon to be removed
+     * card to nodes array, so we can remove them later without knowing who
+     * is the owner (we can get node position instead of player position)
+     */
     private void discardUI()
     {
         nodes.clear();
@@ -675,23 +732,36 @@ public class Game {
             {
                 if (node.equals(selected))
                 {
-                    System.out.println("FOUND!");
-                    // Play animation of fold
-                    Path path = new Path();
-                    path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
-                    path.getElements().add(new LineTo(500,140));
-                    PathTransition pathTransition = new PathTransition();
-                    pathTransition.setPath(path);
-                    pathTransition.setNode(node);
-                    pathTransition.play();
-                    // Keep data for disable visibility later
-                    nodes.add(node);
+                    cardToDealerAnimation(node);
                 }
             }
         }
     }
 
-    // Used in drawing phase
+    /**
+     * Play animation of path from card's current position
+     * to dealer's position
+     * @param node  for getting current position of card
+     */
+    private void cardToDealerAnimation(Node node)
+    {
+        // Play animation of fold
+        Path path = new Path();
+        path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
+        path.getElements().add(new LineTo(500,140));
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setPath(path);
+        pathTransition.setNode(node);
+        pathTransition.play();
+        // Keep data for disable visibility later
+        nodes.add(node);
+    }
+
+    /**
+     * Enable selectable event in drawing turn.
+     * when mouse is hovering over card object, the card will
+     * glow highilight to indicate which card is selected
+     */
     private void enableSelectableCard()
     {
         for (Player player : players)
@@ -701,7 +771,8 @@ public class Game {
                 for (HBox card : player.getImgCards())
                 {
                     DropShadow dsHover = new DropShadow( 15, Color.rgb(0,0,255) );
-                    card.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) -> {
+                    card.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue ) ->
+                    {
                         if ( newValue )
                             card.setEffect(dsHover);
                         else
@@ -709,16 +780,21 @@ public class Game {
                     });
 
                     // set selectable only for player to use in drawing phase
-                    if (!(player instanceof Bot)) {
-                        card.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                    if (!(player instanceof Bot))
+                    {
+                        card.setOnMouseEntered(new EventHandler<MouseEvent>()
+                        {
                             @Override
-                            public void handle(MouseEvent event) {
+                            public void handle(MouseEvent event)
+                            {
                                 card.requestFocus();
                             }
                         });
-                        card.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        card.setOnMouseClicked(new EventHandler<MouseEvent>()
+                        {
                             @Override
-                            public void handle(MouseEvent event) {
+                            public void handle(MouseEvent event)
+                            {
                                 selectedCard.clear();
                                 DropShadow dsClick = new DropShadow( 15, Color.rgb(156,39,6) );
                                 card.setEffect(dsClick);
@@ -732,6 +808,10 @@ public class Game {
         }
     }
 
+    /**
+     * Mirror event flip card in reality, flip card for all players
+     * to see their hand at the end of game
+     */
     private void displayAllCardsUI()
     {
         for (Player player : players)
@@ -756,7 +836,9 @@ public class Game {
         }
     }
 
-    // TODO: WINNER UI is not completed
+    /**
+     * Assign pool to the player with best hand at the end of game
+     */
     private void winnerUI()
     {
         int poolValue = pool.getPool();
@@ -772,7 +854,7 @@ public class Game {
         pool.setPool(poolValue);
         poolLabel.setText(Integer.toString(pool.getPool()));
 
-        // Play animation here : move from current position to the winner's position
+        // Play animation move from current position to the winner's position
         Path path = new Path();
         path.getElements().add(new MoveTo(0, 0));
 
@@ -801,13 +883,20 @@ public class Game {
             pathTransition.setNode(poolLabel);
             pathTransition.play();
         }
-        // TODO: must split pool here
+        // TODO: in case there are multiple players win the pool
         else
         {
 
         }
     }
 
+    /**
+     * Must re-compute position to create path from pool's location
+     * to winner's location because the location of pool is automatically
+     * set to (0,0) due to JavaFx document
+     * @param player    which player
+     * @return coordinate x,y
+     */
     private Point getWinnerPosition(Player player)
     {
         Point point = new Point();
@@ -837,6 +926,9 @@ public class Game {
         return point;
     }
 
+    /***
+     * Update pool value
+     */
     private void updatePoolUI()
     {
         int poolValue = pool.getPool();
@@ -849,40 +941,16 @@ public class Game {
             player.getBetTag().setVisible(false);
             player.getAmountTag().setVisible(false);
         }
-        System.out.println("poolValue = " + poolValue);
         pool.setPool(poolValue);
         poolLabel.setText(Integer.toString(pool.getPool()));
     }
 
-    // fold animation
-    private void foldUI(Player player)
-    {
-        ArrayList<HBox> cards = player.getImgCards();
-        for (int i = cards.size()-1; i > -1; i--)
-        {
-            for (Node node : pane.getChildren())
-            {
-                if (node.equals(cards.get(i)))
-                {
-                    // Play animation of fold
-                    Path path = new Path();
-                    path.getElements().add(new MoveTo(node.getTranslateX(),node.getTranslateY()));
-                    path.getElements().add(new LineTo(500,140));
-                    PathTransition pathTransition = new PathTransition();
-                    pathTransition.setPath(path);
-                    pathTransition.setNode(node);
-                    pathTransition.play();
-                    // Keep data for disable visibility later
-                    nodes.add(node);
-                }
-            }
-        }
-
-        // Change style of name tag for this player
-        player.setNameTagInactive();
-    }
-
-    // update balance animation
+    /**
+     * Update balance UI, display which action that player has chose
+     * also the amount of bet money for that action
+     * @param player  which player
+     * @param action  which action
+     */
     private void updateBalanceUI(Player player, String action)
     {
         Label betTag = player.getBetTag();
@@ -894,6 +962,12 @@ public class Game {
         player.setBalanceLabel();
     }
 
+    /**
+     * Initialize card object and play animation dealer distribute
+     * card for particular player
+     * @param player    which player
+     * @param i         which card
+     */
     private void dealCardUI(Player player, int i)
     {
         // always create both side of card
@@ -945,18 +1019,19 @@ public class Game {
         pane.getChildren().add(layout);
     }
 
+    /**
+     * Helper function preventing program from unknown crash
+     * automatically add 1 to subState (just move to the next player)
+     * @param player which player
+     */
     private void bettingUI(Player player)
     {
-        System.out.println("");
-        System.out.println("Animation for " + player.getName() + " Must add one to subState");
-        System.out.println("");
-        // Add one to subState to go to the next player
-        // TODO: this is not add one, but subState value must come from index of active user
         subState++;
-        System.out.println("BETTING UI : subStated is added to " + subState);
     }
 
-    // Deal card phase
+    /**
+     *  Dealer deal card for every player
+     */
     private void dealCard()
     {
         Deck.getInstance().reInitDeck();
@@ -969,12 +1044,20 @@ public class Game {
             }
         }
 
+        // card on hand must be sorted to be used to calculate
+        // for rate of hand
         for (Player player : players)
         {
             player.getCardOnHand().sortCard();
         }
     }
 
+    /**
+     * Decision making to take a turn in betting round
+     * the decision is depended on how best card on hand is
+     * if rate is high, bot will be more likely to make higher bet
+     * @param player    which player
+     */
     private void bettingRound(Player player)
     {
         // check for active status, if inactive - don't do anything
@@ -982,7 +1065,7 @@ public class Game {
         {
             // Setup available options
             controlButton(true);
-            highestBetBalance = getHighestBetBalance();
+            int highestBetBalance = getHighestBetBalance();
             if (highestBetBalance == 0)
             {
                 availableOption = Arrays.asList("fold","check","bet");
@@ -1022,10 +1105,11 @@ public class Game {
             slider.setMin(0);
             slider.setMax(lowestBalance);
 
+            // betting turn actually happen here
             if (player instanceof Bot)
             {
                 controlButton(true);
-                latestDecision = player.bettingTurn(availableOption);
+                String latestDecision = player.bettingTurn(availableOption);
 
                 int betValue = 0;
                 Random rn = new Random();
@@ -1039,45 +1123,40 @@ public class Game {
                         range = player.getScore();
                         randomNum =  rn.nextInt(range) + 1;
 
+                        // calculate appropriated amount of bet money respect to
+                        // how best of card on hand
                         betValue = player.getBalance() * (( randomNum * 10 ));
                         betValue = betValue/100;
 
-                        if (betValue > getLimitBet())
-                            betValue = getLimitBet();
+                        if (betValue > getLowestBalance())
+                            betValue = getLowestBalance();
 
                         player.setBetBalance(previousBetBalance + betValue);
                         additionalAmount = player.getBetBalance() - previousBetBalance;
                         player.setBalance(player.getBalance() - additionalAmount);
-                        System.out.println(player.getName() + " make a bet");
                         break;
                     case "raise" :
                         previousBetBalance = player.getBetBalance();
                         range = player.getScore();
                         randomNum =  rn.nextInt(range) + 1;
-
                         int current = player.getBalance() - highestBetBalance;
+
+                        // calculate appropriated amount of bet money respect to
+                        // how best of card on hand
                         if (current > 0)
                         {
-                            betValue = current * (( randomNum * 10 ));
+                            betValue = current * (( randomNum * 10));
                             betValue = betValue/100;
                         }
                         else
-                        {
                             betValue = 0;
-                        }
 
-                        //current * bet
-                        if (betValue > getLimitBet()) {
-                            betValue = getLimitBet();
-                        }
+                        if (betValue > getLowestBalance())
+                            betValue = getLowestBalance();
 
-                        System.out.println("=======================================");
-                        System.out.println("bet value is raise : " + (highestBetBalance+betValue));
-                        System.out.println("=======================================");
                         player.setBetBalance(highestBetBalance + betValue);
                         additionalAmount = player.getBetBalance() - previousBetBalance;
                         player.setBalance(player.getBalance() - additionalAmount);
-                        System.out.println(player.getName() + " make a raise");
                         break;
                     // See bet balance of previous active player
                     // to determine amount
@@ -1086,40 +1165,38 @@ public class Game {
                         player.setBetBalance(highestBetBalance);
                         additionalAmount = player.getBetBalance() - previousBetBalance;
                         player.setBalance(player.getBalance() - additionalAmount);
-                        System.out.println(player.getName() + " make a call");
                         break;
                     // Nothing happen to this player
                     case "check" :
                         if (round)
                             state = "cumulate";
                         else
-                        {
-                            System.out.println(player.getName() + " has checked");
                             state = "check";
-                        }
                         break;
                     // Set active to false
                     // also the bet balance for this player will be loss
                     case "fold" :
                         player.setActive(false);
-                        System.out.println(player.getName() + " make a fold");
                         break;
                 }
 
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                // Mirror the reality by delay time for bot's making decision
+                delayTime(1000);
 
-                // TODO: Not sure yet that we should set state here or where
                 state = latestDecision;
             }
-            else // Player's turn
+            // Player's turn : pause state waiting for any event trigger
+            else
                 state = "pause";
         }
     }
 
+    /**
+     * Decision making to take a turn in drawing round
+     * cards to be discarded is obtained from calculating
+     * by rating of card
+     * @param player    which player
+     */
     private void drawingRound(Player player)
     {
         // check for active status, if inactive - don't do anything
@@ -1129,15 +1206,12 @@ public class Game {
             {
                 controlButton(true);
                 selectedCard.clear();
-                System.out.println("+++++++++++++++++DRAWING++++++++++++++++++++++");
-                System.out.print("RANDOM FOR " + player.getName() );
 
+                // Get list of to be discarded cards
                 for (HBox card : player.drawingTurn())
                 {
                     selectedCard.add(card);
                 }
-
-                System.out.println("; selected card = " + selectedCard);
 
                 // remove GUI component
                 for (HBox selected : selectedCard)
@@ -1167,31 +1241,26 @@ public class Game {
                 }
                 player.cardOnHand.sortCard();
 
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                // Mirror the reality by delay time for bot's making decision
+                delayTime(1000);
 
-                //subState++;
                 state = "discardCard";
             }
             // Player's turn
-            else  {
-                System.out.println("+++++++++++++++++DRAWING++++++++++++++++++++++");
-//                controlButton(true);
-//                redrawBtn.setDisable(false);
-//                endTurnBtn.setDisable(false);
+            else
                 state = "pause";
-            }
         }
-        // if not use newDraw, must add one to substate to go to next player
+        // if not use newDraw, must add one to subState to go to next player
+        // because normally newDraw will add one to subState
         else
             subState++;
     }
 
-    // Check for any active user
-    // TODO: add the only active user to winner
+    /**
+     * Check for any active player, if there is only one
+     * active user remains in the game - that player is the winner
+     * @return  true for getting winner or else return false
+     */
     private boolean hasWinner()
     {
         int numberOfActivePlayer = 0;
@@ -1200,13 +1269,13 @@ public class Game {
             if (player.isActive())
             {
                 numberOfActivePlayer++;
-                winner = player;
+                winners.add(player);
             }
         }
 
         if (numberOfActivePlayer > 1)
         {
-            winner = null;
+            winners.clear();
             return false;
         }
         else
@@ -1215,10 +1284,14 @@ public class Game {
         }
     }
 
+    /**
+     * Get possible bet value, bet value must not
+     * greater than the minimum current balance of all player
+     * @return  lowest bet balance
+     */
     private int getLowestBalance()
     {
-        // 500 is start money for every player
-        int lowestBalance = 500;
+        int lowestBalance = 3000;
         for (Player player : players)
         {
             if (player.isActive())
@@ -1230,15 +1303,25 @@ public class Game {
         return lowestBalance;
     }
 
+    /**
+     * Delay time
+     * @param time  time in millisecond
+     */
     private void delayTime(long time)
     {
-        try {
+        try
+        {
             Thread.sleep(time);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException e)
+        {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Control visibility of all GUI components
+     * @param bool
+     */
     private void controlButton(boolean bool)
     {
         bet.setDisable(bool);
@@ -1252,7 +1335,10 @@ public class Game {
         endTurnBtn.setDisable(bool);
     }
 
-    // In the end list of available seat will be left
+    /**
+     * randomly return available seat number
+     * @return seat number
+     */
     private int randomSeat()
     {
         int random = 0;
@@ -1260,35 +1346,33 @@ public class Game {
         return availableSeat.get(random);
     }
 
+    /**
+     * return pane
+     * @return pane
+     */
     public static Pane getPane()
     {
         return pane;
     }
 
+    /**
+     * get betting tag position for particular player
+     * @param player    which player
+     * @return coordinate x,y
+     */
     public static Point getBettingTagPosition(Player player)
     {
         return bettingTagPosition.get(player.getSeat());
     }
 
+    /**
+     * get betting amount position for particular player
+     * @param player    which player
+     * @return coordinate x,y
+     */
     public static Point getBettingAmountPosition(Player player)
     {
         return bettingAmountPosition.get(player.getSeat());
     }
-
-    // Return min bet
-    private int getLimitBet()
-    {
-        int min = 10000;
-        for (Player player : players)
-        {
-            if (player.isActive())
-            {
-                if (player.getBalance() < min)
-                    min = player.getBalance();
-            }
-        }
-        return min;
-    }
-
 
 }

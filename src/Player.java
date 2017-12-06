@@ -343,7 +343,7 @@ public class Player implements Comparable<Player>
     }
 
     /**
-     *  Add check pattern 200 line ggez
+     *  Add check pattern
      */
     public int getpair()
     {
@@ -577,6 +577,7 @@ public class Player implements Comparable<Player>
             return 0;
         }
     }
+
     /**
      * Check pattern of the card on player hand and update score for each player
      */

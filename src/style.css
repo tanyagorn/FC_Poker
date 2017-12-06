@@ -1,3 +1,9 @@
+/**
+ * Style of GUI components
+ *
+ * Created by TC group, 6 December 2017
+ */
+
 #table{
     -fx-background-image: url("img/table2.jpg");
 }
